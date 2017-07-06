@@ -1,6 +1,11 @@
 # GitLab Community Edition
 
-[GitLab Community Edition](https://about.gitlab.com/) is an application to code, test, and deploy code together. It provides Git repository management with fine grained access controls, code reviews, issue tracking, activity feeds, wikis, and continuous integration. 
+[GitLab Community Edition](https://about.gitlab.com/) is an application to code, test, and deploy 
+code together. It provides Git repository management with fine grained access controls, code 
+reviews, issue tracking, activity feeds, wikis, and continuous integration. 
+
+This chart was adapted from 
+[stable/gitlab-ce](https://github.com/kubernetes/charts/tree/master/stable/gitlab-ce).
 
 ## Introduction
 
