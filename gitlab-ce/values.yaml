@@ -75,6 +75,15 @@ persistence:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
 postgresql:
+  instance:
+    name: gitlab-postgres
+    planName: basic50
+    params:
+      resourceGroup: gitlab-postgres-rg
+      location: eastus
+      serverName: gitlab-postgres
+      dbName: gitlab-db
+        
   # 9.6 is the newest supported version for the GitLab container
   imageTag: "9.6"
   cpu: 1000m

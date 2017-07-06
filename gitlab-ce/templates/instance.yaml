@@ -1,0 +1,20 @@
+apiVersion: servicecatalog.k8s.io/v1alpha1
+kind: Instance
+metadata:
+  name: {{ .Values.postgresql.instance.name }}
+spec:
+  serviceClassName: azure-postgresqldb
+  planName: {{ .Values.postgresql.instance.planName }}
+  parameters:
+    resourceGroup: {{ .Values.postgresql.instance.params.resourceGroup }}
+    location: {{ .Values.postgresql.instance.params.location }}
+    postgresqlServerName: {{ .Values.postgresql.instance.params.serverName }}
+    postgresqlServerParameters:
+      properties:
+        administratorLogin: postgres
+        administratorLoginPassword: F00Bar!!
+      allowPostgresqlServerFirewallRules:
+      - ruleName: AllowAllIps
+        startIpAddress: 0.0.0.0
+        endIpAddress: 255.255.255.255
+    postgresqldbName: {{ .Values.postgresql.instance.params.dbName }}

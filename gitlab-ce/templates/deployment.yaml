@@ -42,18 +42,22 @@ spec:
           value: {{ default "" .Values.externalUrl | quote }}
         ## DB configuration
         ##
+        # TODO: get this from the binding secret
         - name: DB_HOST
           value: {{ template "postgresql.fullname" . }}
+        # TODO: get this from the binding secret
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ template "fullname" . }}
               key: db-user
+        # TODO: get this from the binding secret
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ template "fullname" . }}
               key: db-password
+        # TODO: get this from the binding secret
         - name: DB_DATABASE
           value: {{ .Values.postgresql.postgresDatabase | quote }}
         ## Redis configuration
