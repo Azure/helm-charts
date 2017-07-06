@@ -13,3 +13,11 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
+service-catalog/apiserver-key.pem
+service-catalog/apiserver.csr
+service-catalog/apiserver.pem
+service-catalog/ca-key.pem
+service-catalog/ca.csr
+service-catalog/ca.pem
+service-catalog/server-ca-config.json
+service-catalog/svc-cat-ca.json

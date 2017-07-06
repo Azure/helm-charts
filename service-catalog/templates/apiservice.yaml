@@ -1,0 +1,14 @@
+apiVersion: apiregistration.k8s.io/v1beta1
+kind: APIService
+metadata:
+  name: v1alpha1.servicecatalog.k8s.io
+spec:
+  group: servicecatalog.k8s.io
+  version: v1alpha1
+  service:
+    namespace: {{ .Release.Namespace }}
+    name: {{ template "fullname" . }}-apiserver
+  caBundle: {{ (.Files.Get (required "apiserver.tls.caFileName is required" .Values.apiserver.tls.caFileName)) | b64enc }}
+  priority: 100
+  groupPriorityMinimum: 10000
+  versionPriority: 20
