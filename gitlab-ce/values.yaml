@@ -76,43 +76,38 @@ persistence:
 ##
 postgresql:
   instance:
+    serviceClassName: azure-postgresqldb
     name: gitlab-postgres
     planName: basic50
-    params:
+    parameters:
       resourceGroup: gitlab-postgres-rg
       location: eastus
-      serverName: gitlab-postgres
-      dbName: gitlab-db
-      serverParams:
+      postgresqlServerName: gitlab-postgres
+      postgresqldbName: gitlab-db
+      postgresqlServerParameters:
         properties:
           administratorLogin: postgres
           administratorLoginPassword: F00Bar!!
-        firewallRules:
+        allowPostgresqlServerFirewallRules:
           - ruleName: AllowAllIps
           startIpAddress: 0.0.0.0
           endIpAddress: 255.255.255.255
           
-  # 9.6 is the newest supported version for the GitLab container
-  imageTag: "9.6"
-  cpu: 1000m
-  memory: 1Gi
-
-  postgresUser: gitlab
-  postgresPassword: gitlab
-  postgresDatabase: gitlab
-
-  persistence:
-    size: 10Gi
-
 ## Configuration values for the redis dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
 ##
 redis:
-  redisPassword: "gitlab"
-
-  resources:
-    requests:
-      memory: 1Gi
-
-  persistence:
-    size: 10Gi
+  instance:
+    serviceClassName: azure-rediscache
+    name: gitlab-redis
+    planName: basic
+    parameters:
+      resourceGroup: SOUTHCENTRAL
+      cacheName: gitlab-redis
+      parameters:
+        location: southcentralus
+        enableNonSslPort: true
+        sku:
+          name: Basic
+          family: C
+          capacity: 0
