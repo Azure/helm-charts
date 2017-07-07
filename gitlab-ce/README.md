@@ -27,8 +27,9 @@ This chart stands up a GitLab Community Edition install. This includes:
 To install the chart with the release name `my-release` run:
 
 ```bash
-$ helm install --name my-release \
-    --set externalUrl=http://your-domain.com/ stable/gitlab-ce
+helm install . \
+--name my-release \
+--set externalUrl=http://your-domain.com/
 ```
 
 Note that you _must_ pass in externalUrl, or you'll end up with a non-functioning release.
