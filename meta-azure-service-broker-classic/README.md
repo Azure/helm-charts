@@ -70,7 +70,7 @@ Catalog first
 
 To create the required service principal, follow the below steps:
 
-1. Run `az account list` to get the list of subscriptions for the account
+1. Run `az account list -o table` to get the list of subscriptions for the account
 2. Copy the `id` field from the subscription that you wish to use, and write it into a
 `SUB_ID` environment variable:
 

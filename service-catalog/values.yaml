@@ -7,7 +7,7 @@ apiserver:
   imagePullPolicy: Always
   # Whether to expose an insecure endpoint; keep this enabled because there
   # are some outstanding problems with the TLS-secured endpoint
-  # insecure: true
+  insecure: true
   tls:
     # The name of the file that contains the certificate authority for the APIService object to 
     # register the Service Catalog API with the API aggregator in the APIRegistration object.
