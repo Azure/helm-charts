@@ -79,6 +79,7 @@ postgresql:
     name: gitlab-postgres
     secretName: gitlab-postgres
   instance:
+    enabled: true
     serviceClassName: azure-postgresqldb
     name: gitlab-postgres
     planName: basic50
@@ -104,6 +105,7 @@ redis:
     name: gitlab-redis
     secretName: gitlab-redis
   instance:
+    enabled: true
     serviceClassName: azure-rediscache
     name: gitlab-redis
     planName: basic
