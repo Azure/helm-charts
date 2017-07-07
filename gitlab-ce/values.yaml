@@ -83,7 +83,15 @@ postgresql:
       location: eastus
       serverName: gitlab-postgres
       dbName: gitlab-db
-        
+      serverParams:
+        properties:
+          administratorLogin: postgres
+          administratorLoginPassword: F00Bar!!
+        firewallRules:
+          - ruleName: AllowAllIps
+          startIpAddress: 0.0.0.0
+          endIpAddress: 255.255.255.255
+          
   # 9.6 is the newest supported version for the GitLab container
   imageTag: "9.6"
   cpu: 1000m

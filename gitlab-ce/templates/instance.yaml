@@ -11,10 +11,7 @@ spec:
     postgresqlServerName: {{ .Values.postgresql.instance.params.serverName }}
     postgresqlServerParameters:
       properties:
-        administratorLogin: postgres
-        administratorLoginPassword: F00Bar!!
+        {{ toYaml .Values.postgresql.instance.params.serverParams.properties.adminLogin}}
       allowPostgresqlServerFirewallRules:
-      - ruleName: AllowAllIps
-        startIpAddress: 0.0.0.0
-        endIpAddress: 255.255.255.255
+        {{ toYaml .Values.postgresql.instance.params.serverParams.firewallRules}}
     postgresqldbName: {{ .Values.postgresql.instance.params.dbName }}
