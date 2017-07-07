@@ -28,7 +28,7 @@ To install the chart with the release name `my-release` run:
 
 ```bash
 helm install . \
---name my-release \
+--name gitlab \
 --set externalUrl=http://your-domain.com/
 ```
 
@@ -41,33 +41,42 @@ Note that you _must_ pass in externalUrl, or you'll end up with a non-functionin
 To uninstall/delete the `my-release` deployment:
 
 ```bash
-$ helm delete my-release
+$ helm delete gitlab --purge
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Configuration
 
-Refer to [values.yaml](values.yaml) for the full run-down on defaults. These are a mixture of Kubernetes and GitLab-related directives.
+Refer to [values.yaml](values.yaml) for the full run-down on defaults. These are a mixture of 
+Kubernetes and GitLab-related directives.
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`
+
+For example:
 
 ```bash
-$ helm install --name my-release \
-    --set externalUrl=http://your-domain.com/,gitlabRootPassword=pass1234 \
-    stable/gitlab-ce
+$ helm install . \
+--name gitlab \
+--set externalUrl=http://your-domain.com/,gitlabRootPassword=pass1234 \
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-release -f values.yaml stable/gitlab-ce
+$ helm install . \
+--name gitlab \
+-f values.yaml
 ```
 
-> **Tip**: You can use the default [values.yaml](values.yaml)
+> **Tip**: If you use the default [values.yaml](values.yaml) file, you do not need to add a `-f`
+flag
 
 ## Persistence
 
-By default, persistence of GitLab data and configuration happens using PVCs. If you know that you'll need a larger amount of space, make _sure_ to look at the `persistence` section in [values.yaml](values.yaml).
+By default, persistence of GitLab data and configuration happens using PVCs. If you know that 
+you'll need a larger amount of space, make _sure_ to look at the `persistence` section in 
+[values.yaml](values.yaml).
 
-> *"If you disable persistence, the contents of your volume(s) will only last as long as the Pod does. Upgrading or changing certain settings may lead to data loss without persistence."*
+> *"If you disable persistence, the contents of your volume(s) will only last as long as the Pod 
+does. Upgrading or changing certain settings may lead to data loss without persistence."*
