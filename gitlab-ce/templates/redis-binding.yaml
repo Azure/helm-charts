@@ -1,0 +1,8 @@
+apiVersion: servicecatalog.k8s.io/v1alpha1
+kind: Binding
+metadata:
+  name: {{ .Values.redis.binding.name }}
+spec:
+  instanceRef:
+    name: {{ .Values.redis.instance.name }}
+  secretName: {{ .Values.redis.binding.secretName }}

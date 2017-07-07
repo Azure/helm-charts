@@ -75,6 +75,9 @@ persistence:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
 postgresql:
+  binding:
+    name: gitlab-postgres
+    secretName: gitlab-postgres
   instance:
     serviceClassName: azure-postgresqldb
     name: gitlab-postgres
@@ -97,6 +100,9 @@ postgresql:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
 ##
 redis:
+  binding:
+    name: gitlab-redis
+    secretName: gitlab-redis
   instance:
     serviceClassName: azure-rediscache
     name: gitlab-redis
