@@ -40,35 +40,41 @@ spec:
         {{ end }}
         - name: EXTERNAL_URL
           value: {{ default "" .Values.externalUrl | quote }}
+        ## 
         ## DB configuration
         ##
-        # TODO: get this from the binding secret
         - name: DB_HOST
-          value: {{ template "postgresql.fullname" . }}
-        # TODO: get this from the binding secret
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: dbHost
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
-              key: db-user
-        # TODO: get this from the binding secret
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: dbUser
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
-              key: db-password
-        # TODO: get this from the binding secret
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: dbPassword
         - name: DB_DATABASE
-          value: {{ .Values.postgresql.postgresDatabase | quote }}
+          valueFrom:
+            secretKeyRef: {{ .Values.postgresql.binding.secretName }}
+            key: dbName
+        ##
         ## Redis configuration
         ##
         - name: REDIS_HOST
-          value: {{ template "redis.fullname" . }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.redis.binding.secretName }}
+              key: host
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
-              key: redis-password
+              name: {{ .Values.redis.binding.secretName }}
+              key: password
         ports:
         - name: ssh
           containerPort: 22
