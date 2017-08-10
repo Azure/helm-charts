@@ -1,11 +1,18 @@
-{{ if .Values.redis.instance.enabled -}}
 apiVersion: servicecatalog.k8s.io/v1alpha1
 kind: Instance
 metadata:
-  name: {{ required "redis.instance.name is required" .Values.redis.instance.name }}
+  name: jz-gitlab-redis-instance
+  namespace: default
 spec:
-  serviceClassName: {{ required "redis.instance.serviceClassName is required" .Values.redis.instance.serviceClassName }}
-  planName: {{ .Values.redis.instance.planName }}
+  serviceClassName: azure-rediscache
+  planName: basic
   parameters:
-    {{ toYaml (required "redis.instance.parameters is required" .Values.redis.instance.parameters) }}
-{{- end }}
+    resourceGroup: demo
+    cacheName: jz-gitlab-redis # must be globally unique
+    parameters:
+      location: eastus
+      enableNonSslPort: true
+      sku:
+        name: Basic
+        family: C
+        capacity: 0

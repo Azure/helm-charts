@@ -1,11 +1,21 @@
-{{ if .Values.postgresql.instance.enabled -}}
 apiVersion: servicecatalog.k8s.io/v1alpha1
 kind: Instance
 metadata:
-  name: {{ required "postgresql.instance.name is required" .Values.postgresql.instance.name }}
+  name: jz-gitlab-postgres-instance
+  namespace: default
 spec:
-  serviceClassName: {{ required "postgresql.instance.serviceClassName is required" .Values.postgresql.instance.serviceClassName }}
-  planName: {{ required "postgresql.instance.planName is required" .Values.postgresql.instance.planName }}
+  serviceClassName: azure-postgresqldb
+  planName: basic50
   parameters:
-    {{ toYaml (required "postgresql.instance.parameters is required" .Values.postgresql.instance.parameters) }}
-{{- end }}
+    resourceGroup: demo
+    location: eastus
+    postgresqlServerName: jz-gitlab-postgres
+    postgresqlServerParameters:
+      properties:
+        administratorLogin: postgres
+        administratorLoginPassword: F00Bar!!
+      allowPostgresqlServerFirewallRules:
+      - ruleName: AllowAllIps
+        startIpAddress: 0.0.0.0
+        endIpAddress: 255.255.255.255
+    postgresqldbName: my_db

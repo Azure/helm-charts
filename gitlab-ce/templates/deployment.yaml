@@ -47,21 +47,22 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.postgresql.binding.secretName }}
-              key: dbHost
+              key: postgresqlServerName
         - name: DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ .Values.postgresql.binding.secretName }}
-              key: dbUser
+              key: databaseLogin
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.postgresql.binding.secretName }}
-              key: dbPassword
+              key: databaseLoginPassword
         - name: DB_DATABASE
           valueFrom:
-            secretKeyRef: {{ .Values.postgresql.binding.secretName }}
-            key: dbName
+            secretKeyRef:
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: postgresqldbName
         ##
         ## Redis configuration
         ##
@@ -69,12 +70,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Values.redis.binding.secretName }}
-              key: host
+              key: hostname
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.redis.binding.secretName }}
-              key: password
+              key: primaryKey
         ports:
         - name: ssh
           containerPort: 22

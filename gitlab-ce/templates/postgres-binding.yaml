@@ -1,8 +1,9 @@
 apiVersion: servicecatalog.k8s.io/v1alpha1
 kind: Binding
 metadata:
-  name: {{ .Values.postgresql.binding.name }}
+  name: jz-gitlab-postgres-binding
+  namespace: default
 spec:
   instanceRef:
-    name: {{ .Values.postgresql.instance.name }}
-  secretName: {{ .Values.postgresql.binding.secretName }}
+    name: jz-gitlab-postgres-instance
+  secretName: jz-gitlab-postgres-secret
