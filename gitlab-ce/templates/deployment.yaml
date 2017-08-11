@@ -59,7 +59,7 @@ spec:
               name: {{ .Values.postgresql.binding.secretName }}
               key: postgresqlServerName
         - name: DB_USER
-          value: {{ "$DB_DATABASELOGIN"@"$DB_SERVERNAME" }}
+          value: {{ "$DB_DATABASELOGIN@$DB_SERVERNAME" }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
