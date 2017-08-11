@@ -76,8 +76,8 @@ persistence:
 ##
 postgresql:
   binding:
-    name: jz-gitlab-postgres-creds
-    secretName: jz-gitlab-postgres-creds
+    name: jz-gitlab-postgres-binding
+    secretName: jz-gitlab-postgres-secret
   instance:
     enabled: true
     serviceClassName: azure-postgresqldb
@@ -101,8 +101,8 @@ postgresql:
 ##
 redis:
   binding:
-    name: jz-gitlab-redis-creds
-    secretName: jz-gitlab-redis-creds
+    name: jz-gitlab-redis-binding
+    secretName: jz-gitlab-redis-secret
   instance:
     enabled: true
     name: jz-gitlab-redis-instance

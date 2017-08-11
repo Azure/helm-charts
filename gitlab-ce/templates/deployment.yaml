@@ -42,17 +42,24 @@ spec:
           value: {{ default "" .Values.externalUrl | quote }}
         ## 
         ## DB configuration
-        ##
+        ## TODO: Add username@hostname for the username for Postgres on Azure
         - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: postgresqlServerFullyQualifiedDomainName
+        - name: DB_DATABASELOGIN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgresql.binding.secretName }}
+              key: databaseLogin
+        - name: DB_SERVERNAME
           valueFrom:
             secretKeyRef:
               name: {{ .Values.postgresql.binding.secretName }}
               key: postgresqlServerName
         - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: databaseLogin
+          value: {{ "$DB_DATABASELOGIN"@"$DB_SERVERNAME" }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -76,6 +83,11 @@ spec:
             secretKeyRef:
               name: {{ .Values.redis.binding.secretName }}
               key: primaryKey
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.redis.binding.secretName }}
+              key: port
         ports:
         - name: ssh
           containerPort: 22
