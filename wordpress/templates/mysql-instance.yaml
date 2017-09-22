@@ -12,5 +12,5 @@ spec:
   planName: basic50
   parameters:
     location: eastus
-    resourceGroup: demo
+    resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
