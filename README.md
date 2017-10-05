@@ -1,5 +1,7 @@
 # Helm Charts for Kubernetes Service Catalog on Azure
 
+[![CircleCI](https://circleci.com/gh/deis/service-catalog-charts.svg?style=svg&circle-token=e4d53fc2f20c9a1980668f69e314232a479a562c)](https://circleci.com/gh/deis/service-catalog-charts)
+
 This repository contains [Helm](https://helm.sh/) charts for use with the
 [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 and the Microsoft Azure Service Broker.

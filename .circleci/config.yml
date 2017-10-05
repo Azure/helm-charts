@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: Helm Lint
+          command: echo "this will lint helm charts"
+      - run:
+          name: Helm Index
+          command: echo "this will index the helm charts, to prepare for push to azure"
