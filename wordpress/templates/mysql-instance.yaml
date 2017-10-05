@@ -9,7 +9,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   serviceClassName: azure-mysqldb
-  planName: basic50
+  planName: standard800
   parameters:
     location: eastus
     resourceGroup: {{ .Release.Namespace }}
