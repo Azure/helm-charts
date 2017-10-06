@@ -1,31 +1,48 @@
 # WordPress
 
-[WordPress](https://wordpress.org/) is one of the most versatile open source content management systems on the market. A publishing platform for building blogs and websites.
+[WordPress](https://wordpress.org/) is one of the most versatile open source 
+content management systems on the market.
 
-## TL;DR;
+Wordpress is a publishing platform for building blogs and websites.
+
+This chart bootstraps a 
+[WordPress](https://github.com/bitnami/bitnami-docker-wordpress) deployment on 
+a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
+ package manager.
+
+It is inspired by the 
+[upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/wordpress),
+but utilizes the Azure Service Broker to provision an 
+[Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
+database for the Wordpress server to use.
+
+# Basic Installation
+
+Installation of this chart is simple:
 
 ```console
-$ helm install stable/wordpress
+$ helm install .
 ```
 
-## Introduction
+# Prerequisites
 
-This chart bootstraps a [WordPress](https://github.com/bitnami/bitnami-docker-wordpress) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+To install this chart, you must have:
 
-## Prerequisites
-
-- Kubernetes 1.4+ with Beta APIs enabled
+- Kubernetes 1.7+ with beta APIs enabled
+- [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - PV provisioner support in the underlying infrastructure
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release`:
+To install the chart with the release name `my-release` in the namespace `wp`:
 
 ```console
-$ helm install --name my-release stable/wordpress
+$ helm install --name my-release --namespace wp .
 ```
 
-The command deploys WordPress on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys WordPress on the Kubernetes cluster in the default 
+configuration. The [configuration](#configuration) section lists the parameters 
+that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -38,6 +55,9 @@ $ helm delete my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+You also may want to use the `--purge` command line flag to delete the release
+name from the helm deployments list.
 
 ## Configuration
 
