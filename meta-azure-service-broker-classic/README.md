@@ -1,5 +1,8 @@
 # Meta Azure Service Broker
 
+__Note: this chart is deprecated and will be removed in the future. Please 
+instead install the [Azure Service Broker](https://github.com/deis/azure-service-broker)__
+
 Microsoft's
 [Meta Azure Service Broker](https://github.com/azure/meta-azure-service-broker)
 is an [Open Service Broker](https://www.openservicebrokerapi.org/) conformant server, capable of
