@@ -2,12 +2,52 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: ubuntu:14.04
+    steps:
+      # TODO: save the checked-out code in a working directory.
+      # do the same with the installed helm and az binaries
+      - checkout
+      - run:
+          name: Install Basic Utilities
+          command: ./scripts/install-base-prereqs.sh
+      - run:
+          name: Install Helm
+          command: ./scripts/install-helm.sh
+      - run:
+          name: Helm Lint
+          # TODO: make this crawl all helm charts and run `helm lint` on each
+          command: echo "this will lint helm charts. TODO"
+  helm-sync:
+    docker:
+      - image: ubuntu:14.04
     steps:
       - checkout
       - run:
-          name: Helm Lint
-          command: echo "this will lint helm charts"
+          name: Install Basic Utilities
+          command: ./scripts/install-base-prereqs.sh
       - run:
-          name: Helm Index
-          command: echo "this will index the helm charts, to prepare for push to azure"
+          name: Install Helm
+          command: ./scripts/install-helm.sh
+      - run:
+          name: Install Azure CLI 2.0
+          command: ./scripts/install-azure-cli.sh
+      - run:
+          name: Sync Helm Repository
+          command: ./scripts/helm-repo-sync.sh
+          branches:
+            only:
+              - master
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+  build-and-deploy:
+    jobs:
+      - build
+      - helm-sync:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master

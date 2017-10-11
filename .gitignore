@@ -21,3 +21,9 @@ service-catalog/ca.csr
 service-catalog/ca.pem
 service-catalog/server-ca-config.json
 service-catalog/svc-cat-ca.json
+
+repo
+
+darwin-amd64
+linux-amd64
+helm-v2.5.1-*-amd64.tar.gz*
