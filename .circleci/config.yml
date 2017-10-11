@@ -46,8 +46,8 @@ workflows:
     jobs:
       - build
       - helm-sync:
-        requires:
-          - build
+          requires:
+            - build
         filters:
           branches:
             only: master
