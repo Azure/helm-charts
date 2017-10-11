@@ -9,14 +9,16 @@ jobs:
       - checkout
       - run:
           name: Install Basic Utilities
-          command: ./scripts/install-base-prereqs.sh
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
       - run:
           name: Install Helm
-          command: ./scripts/install-helm.sh
+          command: ./install-helm.sh
+          working_directory: scripts
       - run:
           name: Helm Lint
-          # TODO: make this crawl all helm charts and run `helm lint` on each
-          command: echo "this will lint helm charts. TODO"
+          command: ./helm-lint.sh
+          working_directory: scripts
   helm-sync:
     docker:
       - image: ubuntu:14.04
@@ -24,16 +26,20 @@ jobs:
       - checkout
       - run:
           name: Install Basic Utilities
-          command: ./scripts/install-base-prereqs.sh
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
       - run:
           name: Install Helm
-          command: ./scripts/install-helm.sh
+          command: ./install-helm.sh
+          working_directory: scripts
       - run:
           name: Install Azure CLI 2.0
-          command: ./scripts/install-azure-cli.sh
+          command: ./install-azure-cli.sh
+          working_directory: scripts
       - run:
           name: Sync Helm Repository
-          command: ./scripts/helm-repo-sync.sh
+          command: ./helm-repo-sync.sh
+          working_directory: scripts
           branches:
             only:
               - master
