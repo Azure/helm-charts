@@ -1,9 +1,8 @@
 # WordPress
 
 [WordPress](https://wordpress.org/) is one of the most versatile open source 
-content management systems on the market.
-
-Wordpress is a publishing platform for building blogs and websites.
+content management and publishing platforms on the market for building blogs 
+and websites.
 
 This chart bootstraps a 
 [WordPress](https://github.com/bitnami/bitnami-docker-wordpress) deployment on 
@@ -18,10 +17,12 @@ database for the Wordpress server to use.
 
 # Basic Installation
 
-Installation of this chart is simple:
+Installation of this chart is simple. First, ensure that you've [added the
+`azure` repository](../README.md#installing-charts). Then, install from the
+`azure` repo:
 
 ```console
-$ helm install .
+$ helm install azure/wordpress
 ```
 
 # Prerequisites
@@ -37,7 +38,7 @@ To install this chart, you must have:
 To install the chart with the release name `my-release` in the namespace `wp`:
 
 ```console
-$ helm install --name my-release --namespace wp .
+$ helm install --name my-release --namespace wp azure/wordpress
 ```
 
 The command deploys WordPress on the Kubernetes cluster in the default 
@@ -95,7 +96,7 @@ The above parameters map to the env variables defined in [bitnami/wordpress](htt
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-$ helm install stable/wordpress \
+$ helm install azure/wordpress \
   --name my-release \
   --set wordpressUsername=admin \
   --set wordpressPassword=password  

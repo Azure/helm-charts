@@ -140,11 +140,13 @@ that this broker uses.
 There are additional configuration values that have been set to defaults, and you
 can see details in the below [configuration reference](#config-ref).
 
-To install the chart with the release name `masb` into the `masb` namespace, using the defaults,
-and accepting the SQL Server licesne, execute the following command:
+To install, ensure that you've 
+[added the `azure` repository](../README.md#installing-charts). Then, install 
+using the defaults using the release name `masb` into the `masb` namespace and 
+accept the SQL Server license:
 
 ```bash
-helm install . \
+helm install azure/meta-azure-service-broker-classic \
 --name masb \
 --namespace masb \
 --set azure.subscriptionId=${SUB_ID} \
