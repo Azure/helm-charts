@@ -1,0 +1,59 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:14.04
+    steps:
+      # TODO: save the checked-out code in a working directory.
+      # do the same with the installed helm and az binaries
+      - checkout
+      - run:
+          name: Install Basic Utilities
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
+      - run:
+          name: Install Helm
+          command: ./install-helm.sh
+          working_directory: scripts
+      - run:
+          name: Helm Lint
+          command: ./helm-lint.sh
+          working_directory: scripts
+  helm-sync:
+    docker:
+      - image: ubuntu:14.04
+    steps:
+      - checkout
+      - run:
+          name: Install Basic Utilities
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
+      - run:
+          name: Install Helm
+          command: ./install-helm.sh
+          working_directory: scripts
+      - run:
+          name: Install Azure CLI 2.0
+          command: ./install-azure-cli.sh
+          working_directory: scripts
+      - run:
+          name: Sync Helm Repository
+          command: ./helm-repo-sync.sh
+          working_directory: scripts
+          branches:
+            only:
+              - master
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+  build-and-deploy:
+    jobs:
+      - build
+      - helm-sync:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
