@@ -1,4 +1,4 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
+apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
   name: {{ template "fullname" . }}-mysql-instance
@@ -8,8 +8,8 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  serviceClassName: azure-mysqldb
-  planName: standard800
+  clusterServiceClassExternalName: azure-mysqldb
+  clusterServicePlanExternalName: standard800
   parameters:
     location: eastus
     resourceGroup: {{ .Release.Namespace }}
