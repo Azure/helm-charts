@@ -8,8 +8,8 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  externalClusterServiceClassName: azure-mysqldb
-  externalClusterServicePlanName: standard800
+  clusterServiceClassExternalName: azure-mysqldb
+  clusterServicePlanExternalName: standard800
   parameters:
     location: eastus
     resourceGroup: {{ .Release.Namespace }}
