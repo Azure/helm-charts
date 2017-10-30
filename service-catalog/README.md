@@ -23,4 +23,4 @@ acs-engine deploy \
 ```
 
 When your cluster becomes available, see the 
-[service-catalog installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install-1.7.md).
+[service-catalog installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md).
