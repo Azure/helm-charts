@@ -1,9 +1,3 @@
-# DEPRECATED
-
-This repository is _deprecated_. Please do not submit issues or pull requests
-to it. All work has been moved to [Azure/helm-charts](https://github.com/Azure/helm-charts).
-Please do all development work there.
-
 # Helm Charts for Kubernetes Service Catalog on Azure
 
 [![CircleCI](https://circleci.com/gh/deis/service-catalog-charts.svg?style=svg&circle-token=e4d53fc2f20c9a1980668f69e314232a479a562c)](https://circleci.com/gh/deis/service-catalog-charts)
