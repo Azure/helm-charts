@@ -1,5 +1,0 @@
-dependencies:
-- name: sql-server
-  version: 0.1.0
-  repository: file://sql-server
-  condition: sql-server.embedded
