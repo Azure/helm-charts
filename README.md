@@ -9,7 +9,7 @@ This repository contains [Helm](https://helm.sh/) charts for use with the
 and the Microsoft Azure Service Broker.
 
 Each chart has one or more dependencies on Azure services (e.g. Azure SQL, CosmosDB, ...)
-which are fulfilled by the [Azure Service Broker](https://github.com/deis/azure-service-broker) and
+which are fulfilled by the [Azure Service Broker](https://github.com/Azure/azure-service-broker) and
 the [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog) working
 in tandem.
 
@@ -41,9 +41,8 @@ Github repository.
 # Creating a New Chart
 
 
-If you are looking to create a chart, please see 
-[our Github Project](https://github.com/deis/service-catalog-charts/projects/1) for a
-prioritized list of charts to create.
+If you are looking to create a chart, please see the list of with the `Help Wanted`
+label [here](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
 
 # Contributing
 
