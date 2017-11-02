@@ -35,7 +35,7 @@ When your cluster becomes available, see the
 
 If you are using [Minikube](https://github.com/kubernetes/minikube), ensure that you
 are using version [v0.22.0](https://github.com/kubernetes/minikube/releases/tag/v0.22.0) or
-above, and simply execute the following to install your Kubernetes cluster:
+above, and simply execute the following to start your Kubernetes cluster:
 
 
 ```console
