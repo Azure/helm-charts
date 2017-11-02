@@ -13,6 +13,19 @@ which are fulfilled by the [Azure Service Broker](https://github.com/Azure/azure
 the [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog) working
 in tandem.
 
+# Prerequisites
+
+In order to install any of these charts, you'll need the following:
+
+- A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above with support for
+    Service Catalog. See 
+    [service-catalog](https://github.com/Azure/helm-charts/tree/master/service-catalog) for
+    more information on how to turn on support for aggregated APIs
+- [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
+    - [Installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)
+- [Azure Service Broker](https://github.com/Azure/azure-service-broker)
+    - [Installation documentation](https://github.com/Azure/azure-service-broker/blob/master/contrib/k8s/charts/azure-service-broker/README.md)
+
 # Installing Charts
 
 All of the charts herein are stored in a 
