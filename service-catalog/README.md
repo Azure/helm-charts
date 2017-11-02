@@ -28,8 +28,9 @@ acs-engine deploy \
     --api-model acs-engine-kubernetes-config.json
 ```
 
-When your cluster becomes available, see the 
-[service-catalog installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md).
+When your cluster becomes available, and you've installed the Kube Config properly,
+install Service Catalog according to the 
+[installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md).
 
 # Minikube
 
@@ -41,6 +42,9 @@ above, and simply execute the following to start your Kubernetes cluster:
 ```console
 minikube start --extra-config=apiserver.Authorization.Mode=RBAC
 ```
+
+After the command exits successfully, install Service Catalog according to the 
+[installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md).
 
 # Azure Container Service (AKS)
 
