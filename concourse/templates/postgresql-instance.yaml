@@ -9,8 +9,8 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   clusterServiceClassExternalName: azure-postgresqldb
-  clusterServicePlanExternalName: basic100
+  clusterServicePlanExternalName: {{ .Values.azurePostgres.servicePlan }}
   parameters:
-    location: eastus
+    location: {{ .Values.azurePostgres.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled

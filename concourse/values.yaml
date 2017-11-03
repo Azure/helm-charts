@@ -450,4 +450,7 @@ persistence:
     ## Persistent Volume Storage Size.
     ##
     size: 20Gi
-    
+
+azurePostgres:
+  location: westus2
+  servicePlan: basic100

@@ -20,6 +20,7 @@ $ helm install azure/concourse
 
 * Kubernetes 1.7+ with beta APIs enabled
 - [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
+- [Azure Service Broker](https://github.com/azure/azure-service-broker) installed
 * PV support on underlying infrastructure (if persistence is required)
 
 ## Installing the Chart
@@ -27,7 +28,7 @@ $ helm install azure/concourse
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm install --name my-release azure/concourse
+$ helm install --name my-release azure/concourse --namespace concourse
 ```
 
 ## Uninstalling the Chart
