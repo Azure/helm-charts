@@ -1,0 +1,16 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ template "concourse.concourse.fullname" . }}-postgres-instance
+  labels:
+    app: {{ template "concourse.concourse.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  clusterServiceClassExternalName: azure-postgresqldb
+  clusterServicePlanExternalName: basic100
+  parameters:
+    location: eastus
+    resourceGroup: {{ .Release.Namespace }}
+    sslEnforcement: disabled
