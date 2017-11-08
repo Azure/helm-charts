@@ -21,6 +21,30 @@ spec:
           args:
             - "web"
           env:
+            {{ if .Values.postgresql.embedded }}
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "concourse.concourse.fullname" . }}
+                  key: postgresql-host
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "concourse.concourse.fullname" . }}
+                  key: postgresql-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "concourse.postgresql.fullname" . }}
+                  key: postgres-password
+            - name: POSTGRES_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "concourse.concourse.fullname" . }}
+                  key: postgresql-database
+            - name: CONCOURSE_POSTGRES_DATA_SOURCE
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DATABASE)?sslmode=disable
+            {{ else }}
             - name: POSTGRES_HOST
               valueFrom:
                 secretKeyRef:
@@ -42,7 +66,8 @@ spec:
                   name: {{ template "concourse.concourse.fullname" . }}-postgres-secret
                   key: database
             - name: CONCOURSE_POSTGRES_DATA_SOURCE
-              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DATABASE)?sslmode=disable
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST)/$(POSTGRES_DATABASE)?sslmode=require
+            {{ end }}
             {{ if .Values.encryptionKey }}
             - name: CONCOURSE_ENCRYPTION_KEY
               valueFrom:
