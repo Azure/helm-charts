@@ -1,3 +1,4 @@
+{{- if not .Values.postgresql.embedded }}
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
@@ -9,8 +10,9 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   clusterServiceClassExternalName: azure-postgresqldb
-  clusterServicePlanExternalName: {{ .Values.azurePostgres.servicePlan }}
+  clusterServicePlanExternalName: {{ .Values.postgresql.azure.servicePlan }}
   parameters:
-    location: {{ .Values.azurePostgres.location }}
+    location: {{ .Values.postgresql.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
+{{- end }}

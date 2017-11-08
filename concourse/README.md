@@ -4,7 +4,7 @@
 
 This chart bootstraps a [Concourse](https://concourse.ci/) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-It is inspired by the [upstream Concourse chart](https://github.com/kubernetes/charts/tree/master/stable/concourse) but uses the [Azure Service Broker](https://github.com/Azure/azure-service-broker) to provision an [Azure Database for PostgreSQL](https://azure.microsoft.com/services/postgresql/) for Concourse to use.
+It is inspired by the [upstream Concourse chart](https://github.com/kubernetes/charts/tree/master/stable/concourse) but, by default, uses the [Azure Service Broker](https://github.com/Azure/azure-service-broker) to provision an [Azure Database for PostgreSQL](https://azure.microsoft.com/services/postgresql/) for Concourse to use.
 
 ## Basic Installation 
 
@@ -118,7 +118,7 @@ The following tables lists the configurable parameters of the Concourse chart an
 | `web.nameOverride` | Override the Concourse Web components name | `web` |
 | `web.replicas` | Number of Concourse Web replicas | `1` |
 | `web.resources` | Concourse Web resource requests and limits | `{requests: {cpu: "100m", memory: "128Mi"}}` |
-| `web.service.type` | Concourse Web service type | `NodePort` |
+| `web.service.type` | Concourse Web service type | `ClusterIP` |
 | `web.ingress.enabled` | Enable Concourse Web Ingress | `false` |
 | `web.ingress.annotations` | Concourse Web Ingress annotations | `{}` |
 | `web.ingress.hosts` | Concourse Web Ingress Hostnames | `[]` |
@@ -137,6 +137,22 @@ The following tables lists the configurable parameters of the Concourse chart an
 | `persistence.worker.class` | Concourse Worker Persistent Volume Storage Class | `generic` |
 | `persistence.worker.accessMode` | Concourse Worker Persistent Volume Access Mode | `ReadWriteOnce` |
 | `persistence.worker.size` | Concourse Worker Persistent Volume Storage Size | `20Gi` |
+
+The following configuration options are utilized only if `postgresql.embedded` is set to `false` (the default):
+
+| Parameter               | Description                           | Default                                                    |
+| ----------------------- | ----------------------------------    | ---------------------------------------------------------- |
+| `postgresql.azure.servicePlan` | The service plan to use | `basic100` |
+| `postgresql.azure.location` | The Azure region to deploy the PostgreSQL service to | `westus2` |
+
+The following configuration options are utilized only if `postgresql.embedded` is set to `true`:
+
+| Parameter               | Description                           | Default                                                    |
+| ----------------------- | ----------------------------------    | ---------------------------------------------------------- |
+| `postgresql.postgresUser` | PostgreSQL User to create | `concourse` |
+| `postgresql.postgresPassword` | PostgreSQL Password for the new user | `concourse` |
+| `postgresql.postgresDatabase` | PostgreSQL Database to create | `concourse` |
+| `postgresql.persistence.enabled` | Enable PostgreSQL persistence using Persistent Volume Claims | `true` |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
