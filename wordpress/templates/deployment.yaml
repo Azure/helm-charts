@@ -25,6 +25,26 @@ spec:
         {{- else }}
           value: "no"
         {{- end }}
+        {{- if .Values.mysql.embeddedMaria }}
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mariadb.fullname" . }}
+              key: mariadb-root-password
+        - name: MARIADB_HOST
+          value: {{ template "mariadb.fullname" . }}
+        - name: MARIADB_PORT_NUMBER
+          value: "3306"
+        - name: WORDPRESS_DATABASE_NAME
+          value: {{ default "" .Values.mariadb.mariadbDatabase | quote }}
+        - name: WORDPRESS_DATABASE_USER
+          value: {{ default "" .Values.mariadb.mariadbUser | quote }}
+        - name: WORDPRESS_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mariadb.fullname" . }}
+              key: mariadb-password
+        {{- else }}
         - name: MARIADB_HOST
           valueFrom:
             secretKeyRef:
@@ -50,6 +70,7 @@ spec:
             secretKeyRef:
               name: {{ template "fullname" . }}-mysql-secret
               key: password
+        {{- end }}
         - name: WORDPRESS_USERNAME
           value: {{ default "" .Values.wordpressUsername | quote }}
         - name: WORDPRESS_PASSWORD
@@ -129,3 +150,7 @@ spec:
       {{- else }}
         emptyDir: {}
       {{ end }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end -}}
