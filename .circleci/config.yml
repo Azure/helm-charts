@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
+      - image: quay.io/deis/go-dev:v1.2.0
     steps:
       # TODO: save the checked-out code in a working directory.
       # do the same with the installed helm and az binaries
@@ -21,7 +21,7 @@ jobs:
           working_directory: scripts
   helm-sync:
     docker:
-      - image: ubuntu:14.04
+      - image: quay.io/deis/go-dev:v1.2.0
     steps:
       - checkout
       - run:
