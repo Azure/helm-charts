@@ -24,7 +24,7 @@ $ helm install --name artifactory azure/artifactory
 ### Deploying Artifactory OSS
 By default it will run Artifactory-Pro to run Artifactory-Oss use following command:
 ```bash
-$ helm install --name artifactory --set artifactory.image.repository=docker.bintray.io/jfrog/artifactory-oss stable/artifactory
+$ helm install --name artifactory --set artifactory.image.repository=docker.bintray.io/jfrog/artifactory-oss azure/artifactory
 ```
 
 ### Accessing Artifactory
@@ -42,7 +42,7 @@ This will apply any configuration changes on your existing deployment.
 ### Customizing Database password
 You can override the specified database password (set in [values.yaml](values.yaml)), by passing it as a parameter in the install command line
 ```bash
-$ helm install --name artifactory --namespace artifactory --set database.env.pass=12_hX34qwerQ2 stable/artifactory
+$ helm install --name artifactory --namespace artifactory --set database.env.pass=12_hX34qwerQ2 azure/artifactory
 ```
 
 You can customise other parameters in the same way, by passing them on `helm install` command line.
