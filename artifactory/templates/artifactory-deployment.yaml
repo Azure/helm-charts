@@ -58,6 +58,11 @@ spec:
             secretKeyRef:
               name: {{ template "artifactory.artifactory.fullname" }}-postgres-secret
               key: password
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "artifactory.artifactory.fullname" }}-postgres-secret
+              key: host
         {{ end }}
         ports:
         - containerPort: {{ .Values.artifactory.internalPort }}
