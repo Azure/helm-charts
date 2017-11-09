@@ -13,10 +13,12 @@ This chart will do the following:
 
 ## Installing the Chart
 
-To install the chart with the release name `artifactory`:
+Installation of this chart is simple. First, ensure that you've 
+[added the `azure` Helm repository](../README.md#installing-charts). Then, install 
+from the `azure` repo:
 
 ```bash
-$ helm install --name artifactory stable/artifactory
+$ helm install --name artifactory azure/artifactory
 ```
 
 ### Deploying Artifactory OSS
