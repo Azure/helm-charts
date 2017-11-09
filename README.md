@@ -41,7 +41,7 @@ After you've added the Azure charts repository, you'll have access to the charts
 For example, you can search for charts:
 
 ```console
-$helm search wordpress
+$ helm search wordpress
 NAME            	VERSION	DESCRIPTION
 azure/wordpress 	0.6.12 	Web publishing platform for building blogs and ...
 local/wordpress 	0.6.12 	Web publishing platform for building blogs and ...
