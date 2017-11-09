@@ -9,6 +9,11 @@ initContainerImage: "busybox:1.26.2"
 
 # Database
 database:
+  # set this to true if you want this helm chart to install a PostgreSQL database
+  # in the cluster instead of provisioning one on Azure. If this is false, 
+  # a database will be provisioned on Azure according to the parameters under
+  # the below 'azure' key
+  embedded: false
   name: postgresql
   replicaCount: 1
   env:
@@ -37,6 +42,12 @@ database:
     ##   GKE, AWS & OpenStack)
     ##
     # storageClass: "-"
+  # The values under this key control the PostgreSQL instance that is provisioned
+  # on Azure
+  azure:
+    servicePlan: basic100
+    location: eastus
+
 
 # Artifactory
 artifactory:
