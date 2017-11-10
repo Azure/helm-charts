@@ -31,7 +31,8 @@ jobs:
           working_directory: scripts
       - run:
           name: Install the Azure CLI
-          command: ./install-azure-cli.sh      
+          command: ./install-azure-cli.sh
+          working_directory: scripts
   helm-sync:
     docker:
       - image: quay.io/deis/go-dev:v1.2.0
