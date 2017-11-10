@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# About
+#
+# This script installs the Azure CLI. It copies the steps from the following link:
+#
+# https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+#
+# under the "Install with apt package manager" section
+
 # first do an update and install apt-transport-https
 apt-get update
 apt-get install -y apt-transport-https
