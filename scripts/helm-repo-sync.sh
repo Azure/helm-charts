@@ -29,8 +29,8 @@ done
 #####
 # index the charts, merging with the old index.yaml so charts are versioned
 #####
-REPO_URL=https://kubernetescharts.blob.core.windows.net/
-helm repo index --url $REPO_URL --merge index.yaml .
+REPO_ROOT=https://kubernetescharts.blob.core.windows.net
+helm repo index --url "$REPO_ROOT/$AZURE_STORAGE_CONTAINER" --merge index.yaml .
 
 #####
 # upload to Azure blob storage
