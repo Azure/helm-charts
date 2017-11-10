@@ -19,6 +19,19 @@ jobs:
           name: Helm Lint
           command: ./helm-lint.sh
           working_directory: scripts
+  # this step tests the install script for the Azure CLI
+  test-install-az:
+    docker:
+      - image: quay.io/deis/go-dev:v1.2.0
+    steps:
+      - checkout
+      - run:
+          name: Install Basic Utilities
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
+      - run:
+          name: Install the Azure CLI
+          command: ./install-azure-cli.sh      
   helm-sync:
     docker:
       - image: quay.io/deis/go-dev:v1.2.0
@@ -48,6 +61,9 @@ workflows:
   build:
     jobs:
       - build
+  test-install-az-cli:
+    jobs:
+      - test-install-az-cli
   build-and-deploy:
     jobs:
       - build
