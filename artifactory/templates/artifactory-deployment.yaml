@@ -33,7 +33,7 @@ spec:
         image: "{{ .Values.artifactory.image.repository }}:{{ .Values.artifactory.image.version }}"
         imagePullPolicy: {{ .Values.artifactory.image.pullPolicy }}
         env:
-        {{ if .Values.postgresql.embedded }}
+        {{ if .Values.database.embedded -}}
         - name: DB_TYPE
           value: {{ .Values.database.env.type }}
         - name: DB_USER
@@ -45,25 +45,25 @@ spec:
               key: artifactory-database-password
         - name: DB_HOST
           value: {{ template "artifactory.database.name" . }}
-        {{ else }}
+        {{ else -}}
         - name: DB_TYPE
           value: postgres
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: {{ template "artifactory.artifactory.fullname" }}-postgres-secret
+              name: {{ template "artifactory.artifactory.fullname" . }}-postgres-secret
               key: username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "artifactory.artifactory.fullname" }}-postgres-secret
+              name: {{ template "artifactory.artifactory.fullname" . }}-postgres-secret
               key: password
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: {{ template "artifactory.artifactory.fullname" }}-postgres-secret
+              name: {{ template "artifactory.artifactory.fullname" . }}-postgres-secret
               key: host
-        {{ end }}
+        {{ end -}}
         ports:
         - containerPort: {{ .Values.artifactory.internalPort }}
         volumeMounts:
