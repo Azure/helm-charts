@@ -20,7 +20,7 @@ jobs:
           command: ./helm-lint.sh
           working_directory: scripts
   # this step tests the install script for the Azure CLI
-  test-install-az:
+  test-install-az-cli:
     docker:
       - image: quay.io/deis/go-dev:v1.2.0
     steps:
