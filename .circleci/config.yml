@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
+      - image: quay.io/deis/go-dev:v1.2.0
     steps:
       # TODO: save the checked-out code in a working directory.
       # do the same with the installed helm and az binaries
@@ -19,9 +19,23 @@ jobs:
           name: Helm Lint
           command: ./helm-lint.sh
           working_directory: scripts
+  # this step tests the install script for the Azure CLI
+  test-install-az-cli:
+    docker:
+      - image: quay.io/deis/go-dev:v1.2.0
+    steps:
+      - checkout
+      - run:
+          name: Install Basic Utilities
+          command: ./install-base-prereqs.sh
+          working_directory: scripts
+      - run:
+          name: Install the Azure CLI
+          command: ./install-azure-cli.sh
+          working_directory: scripts
   helm-sync:
     docker:
-      - image: ubuntu:14.04
+      - image: quay.io/deis/go-dev:v1.2.0
     steps:
       - checkout
       - run:
@@ -48,6 +62,9 @@ workflows:
   build:
     jobs:
       - build
+  test-install-az-cli:
+    jobs:
+      - test-install-az-cli
   build-and-deploy:
     jobs:
       - build
