@@ -75,45 +75,14 @@ persistence:
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
 postgresql:
-  binding:
-    name: jz-gitlab-postgres-binding
-    secretName: jz-gitlab-postgres-secret
-  instance:
-    enabled: true
-    serviceClassName: azure-postgresqldb
-    name: jz-gitlab-postgres-instance
-    planName: basic50
-    parameters:
-      resourceGroup: demo
-      location: eastus
-      postgresqlServerName: jz-gitlab-postgres
-      postgresqlServerParameters:
-        properties:
-          administratorLogin: postgres
-          administratorLoginPassword: F00Bar!!
-        allowPostgresqlServerFirewallRules:
-        - ruleName: AllowAllIps
-          startIpAddress: 0.0.0.0
-          endIpAddress: 255.255.255.255
-      postgresqldbName: jz_gitlab_db   
+  azure:
+    servicePlan: basic50
+    location: eastus
+   
 ## Configuration values for the redis dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
 ##
 redis:
-  binding:
-    name: jz-gitlab-redis-binding
-    secretName: jz-gitlab-redis-secret
-  instance:
-    enabled: true
-    name: jz-gitlab-redis-instance
-    serviceClassName: azure-rediscache
-    planName: basic
-    parameters:
-      resourceGroup: demo
-      cacheName: jz-gitlab-redis
-      location: eastus
-      enableNonSslPort: true
-      sku:
-        name: Basic
-        family: C
-        capacity: 0
+  azure:
+    servicePlan: basic
+    location: eastus

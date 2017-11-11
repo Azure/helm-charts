@@ -46,47 +46,40 @@ spec:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: postgresqlServerFullyQualifiedDomainName
-        - name: DB_DATABASELOGIN
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: databaseLogin
-        - name: DB_SERVERNAME
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: postgresqlServerName
+              name: {{ template "fullname" . }}-postgres
+              key: host
         - name: DB_USER
-          value: {{ "$DB_DATABASELOGIN@$DB_SERVERNAME" }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}-postgres
+              key: username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: databaseLoginPassword
+              name: {{ template "fullname" . }}-postgres
+              key: password
         - name: DB_DATABASE
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.postgresql.binding.secretName }}
-              key: postgresqldbName
+              name: {{ template "fullname" . }}-postgres
+              key: database
         ##
         ## Redis configuration
         ##
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.redis.binding.secretName }}
-              key: hostname
+              name: {{ template "fullname" . }}-redis
+              key: host
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.redis.binding.secretName }}
-              key: primaryKey
+              name: {{ template "fullname" . }}-redis
+              key: password
         - name: REDIS_PORT
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.redis.binding.secretName }}
+              name: {{ template "fullname" . }}-redis
               key: port
         ports:
         - name: ssh

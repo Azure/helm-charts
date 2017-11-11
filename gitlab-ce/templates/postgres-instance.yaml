@@ -1,21 +1,17 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
-kind: Instance
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
 metadata:
-  name: jz-gitlab-postgres-instance
-  namespace: default
+  name: {{ template "fullname" . }}-postgres
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
-  serviceClassName: azure-postgresqldb
-  planName: basic50
+  clusterServiceClassExternalName: azure-postgresqldb
+  clusterServicePlanExternalName: {{ .Values.postgresql.azure.servicePlan }}
   parameters:
-    resourceGroup: demo
-    location: eastus
-    postgresqlServerName: jz-gitlab-postgres
-    postgresqlServerParameters:
-      properties:
-        administratorLogin: postgres
-        administratorLoginPassword: F00Bar!!
-      allowPostgresqlServerFirewallRules:
-      - ruleName: AllowAllIps
-        startIpAddress: 0.0.0.0
-        endIpAddress: 255.255.255.255
-    postgresqldbName: my_db
+    location: {{ .Values.postgresql.azure.location }}
+    resourceGroup: {{ .Release.Namespace }}
+    extensions:
+    - pg_trgm

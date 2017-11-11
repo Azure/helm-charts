@@ -1,18 +1,15 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
-kind: Instance
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
 metadata:
-  name: jz-gitlab-redis-instance
-  namespace: default
+  name: {{ template "fullname" . }}-redis
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
-  serviceClassName: azure-rediscache
-  planName: basic
+  clusterServiceClassExternalName: azure-rediscache
+  clusterServicePlanExternalName: {{ .Values.redis.azure.servicePlan }}
   parameters:
-    resourceGroup: demo
-    cacheName: jz-gitlab-redis # must be globally unique
-    parameters:
-      location: eastus
-      enableNonSslPort: true
-      sku:
-        name: Basic
-        family: C
-        capacity: 0
+    location: {{ .Values.redis.azure.location }}
+    resourceGroup: {{ .Release.Namespace }}

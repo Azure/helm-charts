@@ -1,9 +1,13 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
-kind: Binding
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
 metadata:
-  name: jz-gitlab-redis-binding
-  namespace: default
+  name: {{ template "fullname" . }}-redis
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   instanceRef:
-    name: jz-gitlab-redis-instance
-  secretName: jz-gitlab-redis-secret
+    name: {{ template "fullname" . }}-redis
+  secretName: {{ template "fullname" . }}-redis

@@ -1,9 +1,13 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
-kind: Binding
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
 metadata:
-  name: jz-gitlab-postgres-binding
-  namespace: default
+  name: {{ template "fullname" . }}-postgres
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
 spec:
   instanceRef:
-    name: jz-gitlab-postgres-instance
-  secretName: jz-gitlab-postgres-secret
+    name: {{ template "fullname" . }}-postgres
+  secretName: {{ template "fullname" . }}-postgres
