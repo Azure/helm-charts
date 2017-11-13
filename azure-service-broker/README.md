@@ -56,40 +56,21 @@ $ export AZURE_CLIENT_SECRET=<password>
 
 ## Installing the Chart
 
-Because this chart is not yet hosted in its own Helm repository at this time,
-installation currently requires cloning this repository.
-
-We assume your system is configured for Go development and that the environment
-variable `GOPATH` is therefore defined. If this is not the case, start by
-exporting this environment variable. Use your discretion in choosing a path,
-but the path used below should generally be adequate:
+Installation of this chart is simple. First, ensure that you've [added the
+`azure` repository](../README.md#installing-charts). Then, install from the
+`azure` repo:
 
 ```console
-export GOPATH=~/Code/go
+$ helm install azure/azure-service-broker --name asb --namespace asb \
+  --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID \
+  --set azure.tenantId=$AZURE_TENANT_ID \
+  --set azure.clientId=$AZURE_CLIENT_ID \
+  --set azure.clientSecret=$AZURE_CLIENT_SECRET
 ```
 
-Then proceed with cloning this repository:
-
-```console
-$ mkdir -p $GOPATH/src/github.com/Azure
-$ git clone git@github.com:Azure/azure-service-broker.git \
-    $GOPATH/src/github.com/Azure/azure-service-broker
-```
-
-To install the chart in the `asb` namespace with the release name `asb`:
-
-```console
-$ cd $GOPATH/src/github.com/Azure/azure-service-broker/contrib/k8s/charts/azure-service-broker
-$ helm install . --name asb --namespace asb \
-    --set azure.subscriptionId=$AZURE_SUBSCRIPTION_ID \
-    --set azure.tenantId=$AZURE_TENANT_ID \
-    --set azure.clientId=$AZURE_CLIENT_ID \
-    --set azure.clientSecret=$AZURE_CLIENT_SECRET
-```
-
-This command deploys the Azure Service Broker on your Kubernetes cluster in the
-default configuration. The [configuration](#configuration) section lists the
-parameters that can optionally be configured during installation.
+If you'd like to customize the installation, please see the 
+[configuration](#configuration) section to see options that can be
+configured during installation.
 
 To verify the service broker has been deployed and show installed service classes and plans:
 
