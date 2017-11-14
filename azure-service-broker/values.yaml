@@ -2,9 +2,9 @@ replicaCount: 1
 
 image:
   ## Image location, NOT including the tag
-  repository: quay.io/deisci/azure-service-broker
+  repository: quay.io/deis/azure-service-broker
   ## Image tag
-  tag: canary
+  tag: v0.3.1
   ## "IfNotPresent", "Always", or "Never"
   pullPolicy: Always
 
