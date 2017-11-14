@@ -18,9 +18,10 @@ in tandem.
 In order to install any of these charts, you'll need the following:
 
 - A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above with support for
-    Service Catalog. See 
+    Service Catalog
+    - See 
     [service-catalog](https://github.com/Azure/helm-charts/tree/master/service-catalog) for
-    more information on how to turn on support for aggregated APIs
+    more information on how to turn on support for service-catalog
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
     - [Installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)
 - [Azure Service Broker](https://github.com/Azure/azure-service-broker)
@@ -58,6 +59,8 @@ If you are looking to create a chart, please see the list of with the `Help Want
 label [here](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
 
 # Contributing
+
+For details on how to contribute to this project, please see [contributing.md](./docs/contributing.md).
 
 This project welcomes contributions and suggestions. All contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
