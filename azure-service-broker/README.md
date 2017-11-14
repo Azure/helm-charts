@@ -129,7 +129,7 @@ Alternatively, copy the charts default values to a file, edit the file to your
 liking, and reference that file in your `helm install` command:
 
 ```console
-$ helm inspect values azure-service-broker > values.yaml
+$ helm inspect values azure/azure-service-broker > values.yaml
 $ vim my-values.yaml
 $ helm install . --name asb --namespace asb --values my-values.yaml
 ```
