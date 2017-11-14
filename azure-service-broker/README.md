@@ -131,6 +131,6 @@ liking, and reference that file in your `helm install` command:
 ```console
 $ helm inspect values azure/azure-service-broker > values.yaml
 $ vim my-values.yaml
-$ helm install . --name asb --namespace asb --values my-values.yaml
+$ helm install azure/azure-service-broker --name asb --namespace asb --values my-values.yaml
 ```
 
