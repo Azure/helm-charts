@@ -25,8 +25,7 @@ In order to install any of these charts, you'll need the following:
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
     - [Installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)
 - [Azure Service Broker](https://github.com/Azure/azure-service-broker)
-    - [Installation documentation](https://github.com/Azure/azure-service-broker/blob/master/contrib/k8s/charts/azure-service-broker/README.md)
-
+    - [Installation documentation](./azure-service-broker/README.md)
 # Installing Charts
 
 All of the charts herein are stored in a 
