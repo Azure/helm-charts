@@ -1,0 +1,134 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "mediawiki.fullname" . }}
+  labels:
+    app: {{ template "mediawiki.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "mediawiki.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "mediawiki.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        - name: ALLOW_EMPTY_PASSWORD
+        {{- if .Values.allowEmptyPassword }}
+          value: "yes"
+        {{- else }}
+          value: "no"
+        {{- end }}
+        {{- if .Values.mysql.embeddedMaria }}
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.mariadb.fullname" . }}
+              key: mariadb-root-password
+        - name: MARIADB_HOST
+          value: {{ template "mediawiki.mariadb.fullname" . }}
+        - name: MARIADB_PORT_NUMBER
+          value: "3306"
+        - name: MEDIAWIKI_DATABASE_NAME
+          value: {{ default "" .Values.mariadb.mariadbDatabase | quote }}
+        - name: MEDIAWIKI_DATABASE_USER
+          value: {{ default "" .Values.mariadb.mariadbUser | quote }}
+        - name: MEDIAWIKI_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.mariadb.fullname" . }}
+              key: mariadb-root-password
+        {{- else }}
+        - name: MARIADB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}-mysql-secret
+              key: host
+        - name: MARIADB_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}-mysql-secret
+              key: port
+        - name: MEDIAWIKI_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}-mysql-secret
+              key: database
+        - name: MEDIAWIKI_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}-mysql-secret
+              key: username
+        - name: MEDIAWIKI_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}-mysql-secret
+              key: password
+        {{- end }}
+        - name: MEDIAWIKI_USERNAME
+          value: {{ default "" .Values.mediawikiUser | quote }}
+        - name: MEDIAWIKI_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}
+              key: mediawiki-password
+        - name: MEDIAWIKI_EMAIL
+          value: {{ default "" .Values.mediawikiEmail | quote }}
+        - name: MEDIAWIKI_WIKI_NAME
+          value: {{ default "" .Values.mediawikiName | quote }}
+        - name: SMTP_HOST_ID
+          value: {{ default "" .Values.smtpHostID | quote }}
+        - name: SMTP_HOST
+          value: {{ default "" .Values.smtpHost | quote }}
+        - name: SMTP_PORT
+          value: {{ default "" .Values.smtpPort | quote }}
+        - name: SMTP_USER
+          value: {{ default "" .Values.smtpUser | quote }}
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "mediawiki.fullname" . }}
+              key: smtp-password
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /index.php
+            port: http
+          initialDelaySeconds: 120
+        readinessProbe:
+          httpGet:
+            path: /index.php
+            port: http
+          initialDelaySeconds: 30
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - name: mediawiki-data
+          mountPath: /bitnami/mediawiki
+        - name: apache-data
+          mountPath: /bitnami/apache
+      volumes:
+      - name: mediawiki-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "mediawiki.fullname" . }}-mediawiki
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: apache-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "mediawiki.fullname" . }}-apache
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
