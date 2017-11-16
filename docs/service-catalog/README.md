@@ -32,6 +32,9 @@ acs-engine deploy \
     --api-model docs/service-catalog/acs-engine-kubernetes-config.json
 ```
 
+_Note: make sure you update `keyData` and `servicePrincipalProfile` in the 
+given `acs-engine-kubernetes-config.json` file_
+
 This command will generate a series of Kubernetes configuration files, named
 according to the Azure region. Choose the one named for the region into which
 you installed your cluster (by default, the new cluster will be installed
