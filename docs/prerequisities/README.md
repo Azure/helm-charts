@@ -28,7 +28,10 @@ minikube start --extra-config=apiserver.Authorization.Mode=RBAC
 ## ACS Engine
 
 If you are using [acs-engine](https://github.com/Azure/acs-engine) to install a cluster, run
-the following command from the root of this repository:
+the below command from the root of this repository.
+
+_Note: make sure you update `keyData` and `servicePrincipalProfile` in the 
+given `acs-engine-kubernetes-config.json` file_
 
 ```console
 acs-engine deploy \
@@ -42,9 +45,6 @@ acs-engine deploy \
 In the above command, `SUB_ID` is the ID for your Azure subscription and `DNS_PREFIX` is 
 a unique string that will prefix all cluster related DNS entries (to avoid collisions 
 with other clusters).
-
-_Note: make sure you update `keyData` and `servicePrincipalProfile` in the 
-given `acs-engine-kubernetes-config.json` file_
 
 This command will generate a series of Kubernetes configuration files, named
 according to the Azure region. Choose the one named for the region into which
