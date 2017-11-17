@@ -17,15 +17,14 @@ in tandem.
 
 In order to install any of these charts, you'll need the following:
 
-- A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above with support for
-    Service Catalog
-    - See 
-    [service-catalog](https://github.com/Azure/helm-charts/tree/master/service-catalog) for
-    more information on how to turn on support for service-catalog
+- A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above, with support for
+[Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
-    - [Installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)
 - [Azure Service Broker](https://github.com/Azure/azure-service-broker)
-    - [Installation documentation](./azure-service-broker/README.md)
+
+Please see [the prerequisities guide](./docs/prerequisities/README.md) for details on
+how to install all of the above prerequisities.
+
 # Installing Charts
 
 All of the charts herein are stored in a 
