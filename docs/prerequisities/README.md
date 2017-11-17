@@ -61,7 +61,7 @@ KUBECONFIG=$KUBECONFIG_PATH:_output/$CLUSTER_NAME/kubeconfig/kubeconfig.$REGION.
 
 ## Azure Container Service (AKS)
 
-Currently, AKS does not fully support aggregated APIs, which are required for 
+Currently, AKS does not support aggregated APIs, which are required for 
 service-catalog installation.
 
 Support is forthcoming, and this document will be updated when aggregated APIs 
