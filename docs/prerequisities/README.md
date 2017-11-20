@@ -67,13 +67,14 @@ service-catalog installation.
 Support is forthcoming, and this document will be updated when aggregated APIs 
 are supported.
 
-# Step 2: Install Helm
+# Step 2: Initialize Helm on the Cluster
 
 If you created your Kubernetes cluster using `acs-engine` in the previous step, Helm
 is already installed and you can skip this section.
 
-Otherwise, you'll need to install Helm yourself. Simply run the following commands 
-from the root of this repository to complete the installation:
+Otherwise, you'll need to install the Helm componentry onto your cluster 
+yourself. Simply run the following commands from the root of this repository 
+to complete the installation:
 
 ```console
 helm init --service-account tiller
