@@ -15,15 +15,13 @@ in tandem.
 
 # Prerequisites
 
-In order to install any of these charts, you'll need the following:
+You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.7 or later,
+with [Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
+and [Azure Service Broker](https://github.com/Azure/azure-service-broker) 
+installed on it.
 
-- A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above, with support for
-[Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-- [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
-- [Azure Service Broker](https://github.com/Azure/azure-service-broker)
-
-Please see [the prerequisities guide](./docs/prerequisities/README.md) for details on
-how to install all of the above prerequisities.
+Please see [the prerequisities guide](./docs/prerequisities/README.md) for 
+details on how to install all of these prerequisities.
 
 # Installing Charts
 
