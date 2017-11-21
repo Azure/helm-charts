@@ -88,7 +88,7 @@ yourself. Simply run the following commands from the root of this repository
 to complete the installation:
 
 ```console
-kubectl create -f https://github.com/Azure/helm-charts/tree/master/docs/prerequities/helm-rbac-config.yaml
+kubectl create -f https://github.com/Azure/helm-charts/blob/master/docs/prerequisities/helm-rbac-config.yaml
 helm init --service-account tiller
 ```
 
