@@ -25,7 +25,8 @@ above, and simply execute the following to start your Kubernetes cluster:
 minikube start --extra-config=apiserver.Authorization.Mode=RBAC
 ```
 
-Note: If you're using [v0.23.0](https://github.com/kubernetes/minikube/releases/tag/v0.22.0),
+Note: If you're using 
+[v0.23.0](https://github.com/kubernetes/minikube/releases/tag/v0.23.0),
 execute the following after you install Minikube:
 
 ```console
