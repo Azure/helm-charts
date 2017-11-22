@@ -41,6 +41,12 @@ mariadb:
   ##
   # mariadbRootPassword:
 
+  ## Related to the Azure Service Broker
+  # Plan to use for the MySQL Instance
+  planName: standard800
+  # Azure Location where to deploy the instance
+  location: eastus
+
   ## Enable persistence using Persistent Volume Claims
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##

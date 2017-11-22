@@ -15,7 +15,7 @@ database for the Wordpress server to use.
 
 # Basic Installation
 
-Installation of this chart is simple. First, ensure that you've added the azure repository. Then, install from the azure repo:
+Installation of this chart is simple. First, ensure that you've added the azure repository. Then, install from the Azure repo:
 
 ```console
 $ helm install azure/phpbb
@@ -28,6 +28,8 @@ To install this chart, you must have:
 - Kubernetes 1.7+ with beta APIs enabled
 - [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - PV provisioner support in the underlying infrastructure
+
+For details on setting up these prerequisites, please see the [prerequisites doc](https://github.com/Azure/helm-charts/tree/master/docs/prerequisities)
 
 ## Installing the Chart
 
@@ -92,7 +94,7 @@ The above command sets the phpBB administrator account username and password to 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install --name my-release -f values.yaml stable/phpbb
+$ helm install --name my-release -f values.yaml azure/phpbb
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
