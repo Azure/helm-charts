@@ -84,8 +84,7 @@ If you created your Kubernetes cluster using `acs-engine` in the previous step, 
 is already installed and you can skip this section.
 
 Otherwise, you'll need to install the Helm componentry onto your cluster 
-yourself. Simply run the following commands from the root of this repository 
-to complete the installation:
+yourself. Simply run the following commands to complete the installation:
 
 ```console
 kubectl create -f https://github.com/Azure/helm-charts/blob/master/docs/prerequisities/helm-rbac-config.yaml
@@ -94,8 +93,8 @@ helm init --service-account tiller
 
 # Step 3: Install Service Catalog
 
-After you've successfully installed your Kubernetes cluster and installed Helm, you'll need
-to install Service Catalog.
+After you've successfully installed your Kubernetes cluster and installed Helm, 
+you'll need to install Service Catalog.
 
 Do so by executing the following command:
 
