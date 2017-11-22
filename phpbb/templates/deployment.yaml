@@ -1,0 +1,105 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "phpbb.fullname" . }}
+  labels:
+    app: {{ template "phpbb.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "phpbb.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "phpbb.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        - name: MARIADB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}-mysql-secret
+              key: host
+        - name: MARIADB_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}-mysql-secret
+              key: port
+        - name: PHPBB_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}-mysql-secret
+              key: password
+        - name: PHPBB_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}-mysql-secret
+              key: username
+        - name: PHPBB_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}-mysql-secret
+              key: database
+        - name: PHPBB_USERNAME
+          value: {{ default "" .Values.phpbbUser | quote }}
+        - name: PHPBB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}
+              key: phpbb-password
+        - name: PHPBB_EMAIL
+          value: {{ default "" .Values.phpbbEmail | quote }}
+        - name: SMTP_HOST
+          value: {{ default "" .Values.smtpHost | quote }}
+        - name: SMTP_PORT
+          value: {{ default "" .Values.smtpPort | quote }}
+        - name: SMTP_USER
+          value: {{ default "" .Values.smtpUser | quote }}
+        - name: SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "phpbb.fullname" . }}
+              key: smtp-password
+        - name: SMTP_PROTOCOL
+          value: {{ default "" .Values.smtpProtocol | quote }}
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /ucp.php
+            port: http
+          initialDelaySeconds: 120
+        readinessProbe:
+          httpGet:
+            path: /ucp.php
+            port: http
+          initialDelaySeconds: 30
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - name: phpbb-data
+          mountPath: /bitnami/phpbb
+        - name: apache-data
+          mountPath: /bitnami/apache
+      volumes:
+      - name: phpbb-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "phpbb.fullname" . }}-phpbb
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: apache-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "phpbb.fullname" . }}-apache
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
