@@ -1,0 +1,16 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ template "phpbb.fullname" . }}-mysql-instance
+  labels:
+    app: {{ template "phpbb.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  clusterServiceClassExternalName: azure-mysqldb
+  clusterServicePlanExternalName: standard800
+  parameters:
+    location: eastus
+    resourceGroup: {{ .Release.Namespace }}
+    sslEnforcement: disabled
