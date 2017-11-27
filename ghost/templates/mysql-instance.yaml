@@ -1,4 +1,3 @@
-{{- if not .Values.mysql.embeddedMaria }}
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
@@ -15,4 +14,3 @@ spec:
     location: eastus
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
-{{- end }}
