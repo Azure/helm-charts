@@ -65,21 +65,12 @@ The following tables lists the configurable parameters of the Ghost chart and th
 | `ghostPassword`                   | Application password                                  | Randomly generated                                        |
 | `ghostEmail`                      | Admin email                                           | `user@example.com`                                        |
 | `ghostBlogTitle`                  | Ghost Blog name                                       | `User's Blog`                                             |
-| `mysql.embeddedMaria`     | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL. This option is available to enable local or no-cost evaluation of this chart. password                                | `false`                                                     |
 | `serviceType`                     | Kubernetes Service type                               | `LoadBalancer`                                            |
 | `persistence.enabled`             | Enable persistence using PVC                          | `true`                                                    |
 | `persistence.storageClass`        | PVC Storage Class for Ghost volume                    | `nil` (uses alpha storage annotation)                     |
 | `persistence.accessMode`          | PVC Access Mode for Ghost volume                      | `ReadWriteOnce`                                           |
 | `persistence.size`                | PVC Storage Request for Ghost volume                  | `8Gi`                                                     |
 | `resources`                       | CPU/Memory resource requests/limits                   | Memory: `512Mi`, CPU: `300m`                              |
-
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
-
-| Parameter                            | Description                                | Default                                                    |
-| -------------------------------      | -------------------------------            | ---------------------------------------------------------- |
-| `mariadb.mariadbDatabase`            | Database name to create                    | `bitnami_ghost`                            |
-| `mariadb.mariadbUser`                | Database user to create                    | `bn_ghost`                                 |
-| `mariadb.mariadbPassword`            | Password for the database                  | _random 10 character long alphanumeric string_ |
 
 The above parameters map to the env variables defined in [bitnami/ghost](http://github.com/bitnami/bitnami-docker-ghost). For more information please refer to the [bitnami/ghost](http://github.com/bitnami/bitnami-docker-ghost) image documentation.
 
@@ -88,17 +79,13 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 ```console
 $ helm install azure/ghost \
   --name my-release \
-  --set ghostUsername=admin \
-  --set ghostPassword=password1234  
+  --namespace ghost 
 ```
-> NOTE: The admin password must be at least 10 characters.
 
-The above command sets the Ghost administrator account username and password to `admin` and `password` respectively.
-
-Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
+Alternatively, a YAML file that specifies the values for all the parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install --name my-release -f values.yaml stable/ghost
+$ helm install --name my-release --namespace ghost -f values.yaml stable/ghost
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)

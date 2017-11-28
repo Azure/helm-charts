@@ -36,14 +36,32 @@ host. To configure Ghost with the URL of your service:
   echo Admin URL : http://127.0.0.1:{{ default "80" .Values.ghostPort }}/ghost
   kubectl port-forward $POD_NAME {{ default "80" .Values.ghostPort }}:2368
 
-{{- else }}
+{{- else if contains "LoadBalancer" .Values.serviceType }}
 
-  echo Blog URL  : http://{{ include "ghost.host" . }}:{{ default "80" .Values.ghostPort }}/
-  echo Admin URL : http://{{ include "ghost.host" . }}:{{ default "80" .Values.ghostPort }}/ghost
+NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+
+Watch the status of the service with: 'kubectl get svc --namespace {{ .Release.Namespace }} -w {{ template "ghost.fullname" . }}'
+
+Watch the status of the pod with: 'kubectl get pod --namespace {{ .Release.Namespace }} -w'
+
+export APP_HOST=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ template "ghost.fullname" . }} --template "{{ "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}" }}")
+
+export APP_PORT={{ default "80" .Values.servicePort  }}
+
 {{- end }}
 
 2. Get your Ghost login credentials by running:
 
   echo Email:    {{ .Values.ghostEmail }}
   echo Password: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "ghost.fullname" . }} -o jsonpath="{.data.ghost-password}" | base64 --decode)
+
+3. Navigate to ghost using a browser:
+With the values obtained from previous setp
+http://{APP_HOST}:{APP_PORT}
+
+Sign in using the admin account:
+Navigate to http://{APP_HOST}:{APP_PORT}/ghost
+Email: {Email}
+Password: {Password}
+
 {{- end }}
