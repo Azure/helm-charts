@@ -27,6 +27,10 @@ volumePermissions:
 ##
 ghostPort: 2368
 
+## Port to map service
+##
+servicePort: 80
+
 ## loadBalancerIP for the Ghost Service (optional, cloud specific)
 ## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
 ##

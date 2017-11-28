@@ -14,7 +14,7 @@ spec:
   {{- end }}
   ports:
   - name: http
-    port: {{ default "80" .Values.ghostPort }}
+    port: {{ default "80" .Values.servicePort }}
     targetPort: http
   selector:
     app: {{ template "ghost.fullname" . }}
