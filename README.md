@@ -13,6 +13,12 @@ which are fulfilled by the [Azure Service Broker](https://github.com/Azure/azure
 the [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog) working
 in tandem.
 
+The following charts are available:
+
+- [Concourse CI](./concourse)
+- [Wordpress](./wordpress)
+- [phpBB](./phpbb)
+
 # Prerequisites
 
 You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.7 or later,
