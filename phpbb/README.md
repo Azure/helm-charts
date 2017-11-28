@@ -27,6 +27,7 @@ To install this chart, you must have:
 
 - Kubernetes 1.7+ with beta APIs enabled
 - [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
+- The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
 - PV provisioner support in the underlying infrastructure
 
 For details on setting up these prerequisites, please see the [prerequisites doc](https://github.com/Azure/helm-charts/tree/master/docs/prerequisities)
