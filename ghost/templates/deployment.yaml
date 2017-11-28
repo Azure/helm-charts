@@ -93,7 +93,7 @@ spec:
           value: {{ default "" .Values.smtpService | quote }}
         ports:
         - name: http
-          containerPort: 2368
+          containerPort: {{ default "80" .Values.ghostPort | quote }}
         livenessProbe:
           httpGet:
             path: /ghost
