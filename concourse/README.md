@@ -18,10 +18,15 @@ $ helm install azure/concourse
 
 ## Prerequisites
 
-* Kubernetes 1.7+ with beta APIs enabled
-- [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- [Azure Service Broker](https://github.com/azure/azure-service-broker) installed
-* PV support on underlying infrastructure (if persistence is required)
+You'll the following before you can install this chart:
+
+- Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
+- [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
+- The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
+- PV Provisioner support in the underlying infrastructure
+
+Please see the [prerequisities document](../docs/prerequisities/README.md) for
+details on how to install everything.
 
 ## Installing the Chart
 
