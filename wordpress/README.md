@@ -27,12 +27,12 @@ $ helm install azure/wordpress
 
 # Prerequisites
 
-You'll the following before you can install this chart:
+You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
-- PV Provisioner support in the underlying infrastructure
+- Support for persistent volumes in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for
 details on how to install everything.
