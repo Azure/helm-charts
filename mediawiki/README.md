@@ -2,21 +2,31 @@
 
 [MediaWiki](https://www.mediawiki.org) is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
 
-## TL;DR;
+This chart bootstraps a
+[MediaWiki](https://github.com/bitnami/bitnami-docker-mediawiki) deployment on
+a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
+ package manager.
+
+It is inspired by the
+[upstream mediawiki chart](https://github.com/kubernetes/charts/tree/master/stable/mediawiki),
+but, by default, utilizes the Azure Service Broker to provision an
+[Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
+database for the Wordpress server to use.
+
+# Basic Installation
+
+Installation of this chart is simple. First, ensure that you've [added the
+`azure` repository](../README.md#installing-charts). Then, install from the
+`azure` repo:
 
 ```console
-$ helm install stable/mediawiki
+$ helm install azure/wordpress
 ```
-
-## Introduction
-
-This chart bootstraps a [MediaWiki](https://github.com/bitnami/bitnami-docker-mediawiki) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
-
-It also packages the [Bitnami MariaDB chart](https://github.com/kubernetes/charts/tree/master/stable/mariadb) which is required for bootstrapping a MariaDB deployment for the database requirements of the MediaWiki application.
 
 ## Prerequisites
 
-- Kubernetes 1.4+ with Beta APIs enabled
+- Kubernetes 1.7+ with beta APIs enabled
+- [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - PV provisioner support in the underlying infrastructure
 
 ## Installing the Chart
