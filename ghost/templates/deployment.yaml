@@ -53,16 +53,6 @@ spec:
             secretKeyRef:
               name: {{ template "ghost.fullname" . }}-mysql-secret
               key: password
-        - name: MARIADB_ROOT_USER
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
-              key: username
-        - name: MARIADB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
-              key: password
         - name: GHOST_HOST
           value: {{ include "ghost.host" . | quote }}
         - name: GHOST_PORT_NUMBER
