@@ -61,6 +61,7 @@ provisioned locally, in the cluster
     - For example, if your chart provisions Azure MySQL, ensure that the chart can be 
     installed with the option to create a MySQL instance in the cluster. The default should
     be to provision on Azure
+- Include a detailed README.md and NOTES.txt file for your chart
 
 # Contributing
 
