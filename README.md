@@ -50,9 +50,17 @@ Github repository.
 
 # Creating a New Chart
 
-
 If you are looking to create a chart, please see the list of with the `Help Wanted`
 label [here](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
+
+If you decide to create a new chart, please follow the following guidelines:
+
+- Look at the [upstream charts repository](https://github.com/kubernetes/charts) for prior art
+- Wherever possible, ensure that your chart has the option to install the service to be 
+provisioned locally, in the cluster
+    - For example, if your chart provisions Azure MySQL, ensure that the chart can be 
+    installed with the option to create a MySQL instance in the cluster. The default should
+    be to provision on Azure
 
 # Contributing
 
