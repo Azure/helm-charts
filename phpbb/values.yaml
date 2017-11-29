@@ -32,6 +32,9 @@ phpbbEmail: user@example.com
 # smtpUser:
 # smtpPassword:
 
+mysql:
+  embeddedMaria: false
+
 ##
 ## MariaDB chart configuration
 ##
