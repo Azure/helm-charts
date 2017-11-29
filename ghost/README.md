@@ -24,6 +24,8 @@ To install this chart, you must have:
 - [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - PV provisioner support in the underlying infrastructure
 
+Please see the [prerequisities document](https://github.com/Azure/helm-charts/blob/master/docs/prerequisities/README.md) for details on how to install everything.
+
 ## Installing the Chart
 
 To install the chart with the release name `my-release` in the namespace `wp`:
