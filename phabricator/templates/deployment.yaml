@@ -1,21 +1,21 @@
+{{- if include "phabricator.host" . -}}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "phpbb.fullname" . }}
+  name: {{ template "phabricator.fullname" . }}
   labels:
-    app: {{ template "phpbb.fullname" . }}
+    app: {{ template "phabricator.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  replicas: 1
   template:
     metadata:
       labels:
-        app: {{ template "phpbb.fullname" . }}
+        app: {{ template "phabricator.fullname" . }}
     spec:
       containers:
-      - name: {{ template "phpbb.fullname" . }}
+      - name: {{ template "phabricator.fullname" . }}
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
@@ -39,15 +39,21 @@ spec:
             secretKeyRef:
               name: {{ template "phpbb.fullname" . }}-mysql-secret
               key: username
-        - name: PHPBB_USERNAME
-          value: {{ default "" .Values.phpbbUser | quote }}
-        - name: PHPBB_PASSWORD
+        - name: PHABRICATOR_HOST
+          value: {{ include "phabricator.host" . | quote }}
+        - name: PHABRICATOR_USERNAME
+          value: {{ default "" .Values.phabricatorUsername | quote }}
+        - name: PHABRICATOR_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "phpbb.fullname" . }}
-              key: phpbb-password
-        - name: PHPBB_EMAIL
-          value: {{ default "" .Values.phpbbEmail | quote }}
+              name: {{ template "phabricator.fullname" . }}
+              key: phabricator-password
+        - name: PHABRICATOR_EMAIL
+          value: {{ default "" .Values.phabricatorEmail | quote }}
+        - name: PHABRICATOR_FIRSTNAME
+          value: {{ default "" .Values.phabricatorFirstName | quote }}
+        - name: PHABRICATOR_LASTNAME
+          value: {{ default "" .Values.phabricatorLastName | quote }}
         - name: SMTP_HOST
           value: {{ default "" .Values.smtpHost | quote }}
         - name: SMTP_PORT
@@ -57,7 +63,7 @@ spec:
         - name: SMTP_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "phpbb.fullname" . }}
+              name: {{ template "phabricator.fullname" . }}
               key: smtp-password
         - name: SMTP_PROTOCOL
           value: {{ default "" .Values.smtpProtocol | quote }}
@@ -68,33 +74,44 @@ spec:
           containerPort: 443
         livenessProbe:
           httpGet:
-            path: /ucp.php
+            path: /auth/
             port: http
-          initialDelaySeconds: 120
+            httpHeaders:
+            - name: Host
+              value: {{ include "phabricator.host" . | quote }}
+          initialDelaySeconds: 180
+          timeoutSeconds: 5
+          failureThreshold: 6
         readinessProbe:
           httpGet:
-            path: /ucp.php
+            path: /auth/
             port: http
+            httpHeaders:
+            - name: Host
+              value: {{ include "phabricator.host" . | quote }}
           initialDelaySeconds: 30
+          timeoutSeconds: 3
+          periodSeconds: 5
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
-        - name: phpbb-data
-          mountPath: /bitnami/phpbb
+        - name: phabricator-data
+          mountPath: /bitnami/phabricator
         - name: apache-data
           mountPath: /bitnami/apache
       volumes:
-      - name: phpbb-data
+      - name: phabricator-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "phpbb.fullname" . }}-phpbb
+          claimName: {{ template "phabricator.fullname" . }}-phabricator
       {{- else }}
         emptyDir: {}
       {{- end }}
       - name: apache-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "phpbb.fullname" . }}-apache
+          claimName: {{ template "phabricator.fullname" . }}-apache
       {{- else }}
         emptyDir: {}
       {{- end }}
+{{- end -}}

@@ -1,18 +1,26 @@
-name: phpbb
+name: phabricator
 version: 0.1.0
-appVersion: 3.2.1
-description: Community forum that supports the notion of users and groups, file attachments,
-  full-text search, notifications and more.
+appVersion: 2017.46.0
+description: Collection of open source web applications that help software companies build better software.
 keywords:
-- phpbb
-- forum
+- phabricator
 - http
-- php
-home: https://www.phpbb.com/
-icon: https://bitnami.com/assets/stacks/phpbb/img/phpbb-stack-220x234.png
+- https
+- web
+- application
+- collaboration
+- project management
+- bug tracking
+- code review
+- wiki
+- git
+- mercurial
+- subversion
+home: https://www.phacility.com/phabricator/
 sources:
-- https://github.com/bitnami/bitnami-docker-phpbb
+- https://github.com/bitnami/bitnami-docker-phabricator
 maintainers:
 - name: Julien Stroheker
   email: juliens@microsoft.com
 engine: gotpl
+icon: https://bitnami.com/assets/stacks/phabricator/img/phabricator-stack-110x117.png

@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "phabricator.fullname" . }}-apache
+  name: {{ template "phabricator.fullname" . }}-phabricator
   labels:
     app: {{ template "phabricator.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -10,15 +10,15 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   accessModes:
-    - {{ .Values.persistence.apache.accessMode | quote }}
+    - {{ .Values.persistence.phabricator.accessMode | quote }}
   resources:
     requests:
-      storage: {{ .Values.persistence.apache.size | quote }}
-{{- if .Values.persistence.apache.storageClass }}
-{{- if (eq "-" .Values.persistence.apache.storageClass) }}
+      storage: {{ .Values.persistence.phabricator.size | quote }}
+{{- if .Values.persistence.phabricator.storageClass }}
+{{- if (eq "-" .Values.persistence.phabricator.storageClass) }}
   storageClassName: ""
 {{- else }}
-  storageClassName: "{{ .Values.persistence.apache.storageClass }}"
+  storageClassName: "{{ .Values.persistence.phabricator.storageClass }}"
 {{- end }}
 {{- end }}
 {{- end -}}

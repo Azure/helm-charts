@@ -1,9 +1,9 @@
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
-  name: {{ template "phpbb.fullname" . }}-mysql-instance
+  name: {{ template "phabricator.fullname" . }}-mysql-instance
   labels:
-    app: {{ template "phpbb.fullname" . }}
+    app: {{ template "phabricator.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
