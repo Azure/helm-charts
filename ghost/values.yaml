@@ -1,0 +1,131 @@
+## Bitnami Ghost image version
+## ref: https://hub.docker.com/r/bitnami/ghost/tags/
+##
+image: bitnami/ghost:1.17.3-r1
+
+## Busybox image used to configure volume permissions
+##
+volumePermissions:
+  image:
+    name: busybox
+    tag: 1.27.1
+#    pullPolicy:
+
+## Specify a imagePullPolicy
+## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+##
+# imagePullPolicy:
+
+## Ghost host to create application URLs
+## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
+##
+ghostHost: localhost
+
+## Ghost port to create application URLs along with host.
+## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
+##
+ghostPort: 2368
+
+## Port to map service
+##
+servicePort: 80
+
+## loadBalancerIP for the Ghost Service (optional, cloud specific)
+## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
+##
+# ghostLoadBalancerIP:
+
+## User of the application
+## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
+##
+ghostUsername: user@example.com
+
+## Application password
+## Defaults to a random 10-character alphanumeric string if not set
+## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
+##
+# ghostPassword:
+
+## Admin email
+## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
+##
+ghostEmail: user@example.com
+
+## Ghost Blog name
+## ref: https://github.com/bitnami/bitnami-docker-ghost#environment-variables
+##
+ghostBlogTitle: User's Blog
+
+## SMTP mail delivery configuration
+## ref: https://github.com/bitnami/bitnami-docker-redmine/#smtp-configuration
+##
+# smtpHost:
+# smtpPort:
+# smtpUser:
+# smtpPassword:
+# smtpService:
+
+mysql:
+  embeddedMaria: false
+
+##
+## MariaDB chart configuration
+##
+mariadb:
+  ## MariaDB admin password
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#setting-the-root-password-on-first-run
+  ##
+  # mariadbRootPassword:
+
+  ## Create a database
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-on-first-run
+  ##
+  mariadbDatabase: bitnami_ghost
+
+  ## Create a database user
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  mariadbUser: bn_ghost
+
+  ## Password for mariadbUser
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  # mariadbPassword:
+
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  persistence:
+    enabled: true
+    ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+    ## Default: volume.alpha.kubernetes.io/storage-class: default
+    ##
+    # storageClass:
+    accessMode: ReadWriteOnce
+    size: 8Gi
+
+## Kubernetes configuration
+## For minikube, set this to NodePort, elsewhere use LoadBalancer
+##
+serviceType: LoadBalancer
+
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  enabled: true
+  ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+  ## Default: volume.alpha.kubernetes.io/storage-class: default
+  ##
+  # storageClass:
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+##
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 300m
