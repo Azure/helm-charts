@@ -28,7 +28,7 @@ Please see the [prerequisities document](https://github.com/Azure/helm-charts/bl
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release` in the namespace `wp`:
+To install the chart with the release name `my-release` in the namespace `ghost`:
 
 ```console
 $ helm install --name my-release --namespace ghost azure/ghost
