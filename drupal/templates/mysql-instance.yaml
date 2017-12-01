@@ -1,0 +1,18 @@
+{{- if not .Values.mysql.embeddedMaria }}
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ template "drupal.fullname" . }}-mysql-instance
+  labels:
+    app: {{ template "drupal.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  clusterServiceClassExternalName: azure-mysqldb
+  clusterServicePlanExternalName: "{{ .Values.mariadb.planName }}"
+  parameters:
+    location: "{{ .Values.mariadb.location }}"
+    resourceGroup: {{ .Release.Namespace }}
+    sslEnforcement: disabled
+{{- end }}
