@@ -6,7 +6,8 @@
 
 This repository contains [Helm](https://helm.sh/) charts for use with the
 [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-and the Microsoft Open Service Broker for Azure.
+and the 
+[Microsoft Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure].
 
 Each chart has one or more dependencies on Azure services (e.g. Azure SQL, CosmosDB, ...)
 which are fulfilled by [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) and
@@ -18,6 +19,8 @@ The following charts are available:
 - [Concourse CI](./concourse)
 - [Wordpress](./wordpress)
 - [phpBB](./phpbb)
+- [Drupal](./drupal)
+- [Ghost Blog](./ghost)
 
 # Prerequisites
 
