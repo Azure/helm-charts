@@ -61,9 +61,19 @@ workflows:
   version: 2
   build:
     jobs:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: master
       - build
   test-install-az-cli:
     jobs:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: master
       - test-install-az-cli
   build-and-deploy:
     jobs:
