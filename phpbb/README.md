@@ -34,7 +34,7 @@ For details on setting up these prerequisites, please see the [prerequisites doc
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release` in the namespace wp:
+To install the chart with the release name `my-release` in the namespace phpbb:
 
 ```console
 $ helm install --name my-release --namespace phpbb azure/phpbb
