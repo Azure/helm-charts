@@ -66,7 +66,9 @@ workflows:
           filters:
             branches:
               ignore: master
-      - build
+      - build:
+          requires:
+            - hold
   test-install-az-cli:
     jobs:
       - hold:
@@ -74,7 +76,9 @@ workflows:
           filters:
             branches:
               ignore: master
-      - test-install-az-cli
+      - test-install-az-cli:
+          requires:
+            - hold
   build-and-deploy:
     jobs:
       - build:
