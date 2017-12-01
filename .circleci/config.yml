@@ -61,13 +61,30 @@ workflows:
   version: 2
   build:
     jobs:
-      - build
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: master
+      - build:
+          requires:
+            - hold
   test-install-az-cli:
     jobs:
-      - test-install-az-cli
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: master
+      - test-install-az-cli:
+          requires:
+            - hold
   build-and-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
       - helm-sync:
           requires:
             - build
