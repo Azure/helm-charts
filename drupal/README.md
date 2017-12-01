@@ -3,15 +3,15 @@
 [Drupal](https://www.drupal.org/) is one of the most versatile open source content management systems on the market.
 
 This chart bootstraps a
-[WordPress](https://github.com/bitnami/bitnami-docker-drupal) deployment on
+[Drupal](https://github.com/bitnami/bitnami-docker-drupal) deployment on
 a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
  package manager.
 
 It is inspired by the
-[upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/drupal,
+[upstream drupal chart](https://github.com/kubernetes/charts/tree/master/stable/drupal,
 but, by default, utilizes the Azure Service Broker to provision an
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
-database for the Wordpress server to use.
+database for the Drupal server to use.
 
 # Basic Installation
 
@@ -20,7 +20,7 @@ Installation of this chart is simple. First, ensure that you've [added the
 `azure` repo:
 
 ```console
-$ helm install azure/wordpress
+$ helm install azure/drupal
 ```
 
 ## Introduction
