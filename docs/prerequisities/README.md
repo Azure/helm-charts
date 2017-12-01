@@ -6,7 +6,7 @@ In order to use the charts in this repository, you must have the following compo
 (version 1.7 or later)
 1. [Helm](https://github.com/kubernetes/helm)
 1. [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-1. [Open Service Broker Azure](https://github.com/azure/open-service-broker-azure)
+1. [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure)
 
 This document describes how to install all these pre-requisities.
 
@@ -106,10 +106,10 @@ helm install svc-cat/catalog --name catalog --namespace catalog
 _If you'd like a more advanced installation, see the 
 [Service Catalog installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)._
 
-# Step 4: Install the Open Service Broker Azure
+# Step 4: Install the Open Service Broker for Azure
 
 After you've successfully installed service catalog, you'll need to install
-the [Open Service Broker Azure](https://github.com/azure/open-service-broker-azure).
+the [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure).
 
 To do so, please follow the 
-[installation instructions for Open Service Broker Azure](https://github.com/Azure/helm-charts/tree/master/open-service-broker-azure).
+[installation instructions for Open Service Broker for Azure](https://github.com/Azure/helm-charts/tree/master/open-service-broker-azure).

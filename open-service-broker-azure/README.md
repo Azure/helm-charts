@@ -1,11 +1,11 @@
-# Open Service Broker Azure
+# Open Service Broker for Azure
 
-[Open Service Broker Azure](https://github.com/Azure/open-service-broker-azure) is the
+[Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) is the
 open source, [Open Service Broker](https://www.openservicebrokerapi.org/)
 compatible API server that provisions managed services in the Microsoft
 Azure public cloud.
 
-This chart bootstraps Open Service Broker Azure in your Kubernetes cluster.
+This chart bootstraps Open Service Broker for Azure in your Kubernetes cluster.
 
 ## Prerequisites
 
