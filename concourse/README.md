@@ -4,7 +4,7 @@
 
 This chart bootstraps a [Concourse](https://concourse.ci/) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-It is inspired by the [upstream Concourse chart](https://github.com/kubernetes/charts/tree/master/stable/concourse) but, by default, uses the [Azure Service Broker](https://github.com/Azure/azure-service-broker) to provision an [Azure Database for PostgreSQL](https://azure.microsoft.com/services/postgresql/) for Concourse to use.
+It is inspired by the [upstream Concourse chart](https://github.com/kubernetes/charts/tree/master/stable/concourse) but, by default, uses [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) to provision an [Azure Database for PostgreSQL](https://azure.microsoft.com/services/postgresql/) for Concourse to use.
 
 ## Basic Installation 
 
@@ -22,7 +22,7 @@ You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
+- [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) installed
 - Support for persistent volumes in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for

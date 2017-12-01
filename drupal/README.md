@@ -9,7 +9,7 @@ a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
 
 It is inspired by the
 [upstream drupal chart](https://github.com/kubernetes/charts/tree/master/stable/drupal,
-but, by default, utilizes the Azure Service Broker to provision an
+but, by default, utilizes Open Service Broker for Azure to provision an
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
 database for the Drupal server to use.
 
@@ -35,7 +35,7 @@ You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
+- [Open Service Broker for Azure](https://github.com/Azure/azure-service-broker) installed
 - Support for persistent volumes in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for

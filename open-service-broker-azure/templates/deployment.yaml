@@ -21,7 +21,7 @@ spec:
         heritage: "{{ .Release.Service }}"
     spec:
       containers:
-        - name: azure-service-broker
+        - name: open-service-broker-azure
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:

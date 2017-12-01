@@ -1,14 +1,14 @@
 apiVersion: v1
-description: A Helm chart for the Azure Service Broker
-name: azure-service-broker
+description: A Helm chart for Open Service Broker For Azure
+name: open-service-broker-azure
 version: 0.1.0
 keywords:
   - azure
   - services
   - service broker
-home: https://github.com/azure/azure-service-broker
+home: https://github.com/azure/open-service-broker-azure
 sources:
-  - https://github.com/azure/azure-service-broker
+  - https://github.com/azure/open-service-broker-azure
   - https://hub.docker.com/r/microsoft/azure-service-broker/
 maintainers:
   - name: Kent Rancourt
