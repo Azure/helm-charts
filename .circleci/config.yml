@@ -77,7 +77,10 @@ workflows:
       - test-install-az-cli
   build-and-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
       - helm-sync:
           requires:
             - build
