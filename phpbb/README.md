@@ -9,7 +9,7 @@ a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
 
 It is inspired by the 
 [upstream phpBB chart](https://github.com/kubernetes/charts/tree/master/stable/phpbb),
-but, by default, utilizes the Azure Service Broker to provision an 
+but, by default, utilizes the Open Service Broker Azure to provision an 
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
 database for the Wordpress server to use.
 
@@ -27,7 +27,7 @@ To install this chart, you must have:
 
 - Kubernetes 1.7+ with beta APIs enabled
 - [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- The [Azure Service Broker](https://github.com/Azure/azure-service-broker) installed
+- The [Open Service Broker Azure](https://github.com/Azure/open-service-broker-azure) installed
 - PV provisioner support in the underlying infrastructure
 
 For details on setting up these prerequisites, please see the [prerequisites doc](https://github.com/Azure/helm-charts/tree/master/docs/prerequisities)

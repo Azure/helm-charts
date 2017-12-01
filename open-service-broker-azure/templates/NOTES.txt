@@ -1,6 +1,6 @@
 {{- if and (not .Values.registerBroker) (or (eq .Values.service.type "LoadBalancer") (eq .Values.service.type "NodePort")) }}
 {{- if eq .Values.service.type "LoadBalancer" }}
-1. To get Azure Service Broker's load balancer IP/hostname:
+1. To get Open Service Broker Azure's load balancer IP/hostname:
 
     NOTE: It may take a few minutes for this to become available.
 
@@ -13,7 +13,7 @@
         $ kubectl describe svc {{ template "fullname" . }} -n {{ .Release.Namespace }} | grep Ingress: | awk '{print $3}'
 {{ end }}
 {{- if eq .Values.service.type "NodePort" }}
-1. Azure Service Broker's node port: {{ .Values.service.nodePort.port }}
+1. Open Service Broker Azure's node port: {{ .Values.service.nodePort.port }}
 {{ end }}
 2. Credentials for connecting to the broker:
 
