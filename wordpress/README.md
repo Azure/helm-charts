@@ -11,7 +11,7 @@ a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
 
 It is inspired by the 
 [upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/wordpress),
-but, by default, utilizes the Open Service Broker for Azure to provision an 
+but, by default, utilizes Open Service Broker For Azure to provision an 
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
 database for the Wordpress server to use.
 

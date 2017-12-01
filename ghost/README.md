@@ -5,7 +5,7 @@
 This chart bootstraps a [Ghost](https://github.com/bitnami/bitnami-docker-ghost) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 It is inspired by the 
-[upstream ghost chart](https://github.com/kubernetes/charts/tree/master/stable/ghost), but, by default, utilizes the Open Service Broker for Azure to provision an [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) database for the Ghost server to use.
+[upstream ghost chart](https://github.com/kubernetes/charts/tree/master/stable/ghost), but, by default, utilizes Open Service Broker For Azure to provision an [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) database for the Ghost server to use.
 
 # Basic Installation
 
