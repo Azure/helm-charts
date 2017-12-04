@@ -9,6 +9,9 @@ This repository contains [Helm](https://helm.sh/) charts for use with the
 and the 
 [Microsoft Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure].
 
+| 🚨  | The project is in **alpha** status. This means that no assurances are made about backwards compatibility or stability until [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) has reached v1. |
+|---|---|
+
 Each chart has one or more dependencies on Azure services (e.g. Azure SQL, CosmosDB, ...)
 which are fulfilled by [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) and
 the [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog) working
