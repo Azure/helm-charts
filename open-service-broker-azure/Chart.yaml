@@ -2,7 +2,7 @@ apiVersion: v1
 description: A Helm chart for Open Service Broker For Azure
 name: open-service-broker-azure
 version: 0.2.0
-appVersion: 0.4.0-alpha
+appVersion: v0.4.0-alpha
 keywords:
   - azure
   - services

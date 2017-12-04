@@ -6,7 +6,7 @@ image:
   ## Image tag
   tag: v0.4.0-alpha
   ## "IfNotPresent", "Always", or "Never"
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 ## Whether to register this broker with the Kubernetes Service Catalog. If true,
 ## the Kubernetes Service Catalog must already be installed on the cluster.
