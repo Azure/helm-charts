@@ -101,8 +101,8 @@ Broker chart and their default values.
 | Parameter | Description | Default |
 | --------- | ----------- | ------- |
 | `image.repository` | Docker image location, _without_ the tag. | `"microsoft/azure-service-broker"` |
-| `image.tag` | Tag / version of the Docker image. | `"canary"`; This references an image built from the very latest, possibly unreleased source code. This value is temporary and will change once OSBA and its chart both stabilize. At that time, each revision of the chart will reference a specific OSBA version using an _immutable_ tag, such as a semantic version. |
-| `image.pullPolicy` | `"IfNotPresent"`, `"Always"`, or `"Never"`; When launching a pod, this option indicates when to pull the OSBA Docker image. | `"Always"`; This policy complements the use of the mutable `canary` tag. This value is temporary and will change once OSBA and its chart both stabalize and begin to reference images using _immutable_ tags, such as semantic versions. |
+| `image.tag` | Tag / version of the Docker image. | `"v0.4.0-alpha"` |
+| `image.pullPolicy` | `"IfNotPresent"`, `"Always"`, or `"Never"`; When launching a pod, this option indicates when to pull the OSBA Docker image. | `"IfNotPresent"` |
 | `registerBroker` | Whether to register this broker with the Kubernetes Service Catalog. If true, the Kubernetes Service Catalog must already be installed on the cluster. Marking this option false is useful for scenarios wherein one wishes to host the broker in a separate cluster than the Service Catalog (or other client) that will access it. | `true` |
 | `service.type` | Type of service; valid values are `"ClusterIP"`, `"LoadBalancer"`, and `"NodePort"`. `"ClusterIP"` is sufficient in the average case where OSBA only receives traffic from within the cluster-- e.g. from Kubernetes Service Catalog. | `"ClusterIP"` |
 | `service.nodePort.port` | _If and only if_ `service.type` is set to `"NodePort"`, `service.nodePort.port` indicates the port this service should bind to on each Kubernetes node. | `30080` |
