@@ -59,10 +59,15 @@ Github repository.
 
 # Creating a New Chart
 
-If you are looking to create a chart, please see the list of with the `Help Wanted`
-label [here](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
+If you have an idea for an application you'd like to see in this repository,
+we'd love to see it! We welcome all pull requests.
 
-If you decide to create a new chart, please follow the following guidelines:
+If you're looking for some ideas for charts to write, we have a list of interesting
+ones under the 
+[`Help Wanted` label](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+in our issues list.
+
+Please follow the below guidelines when creating your new chart.
 
 - Look at the [upstream charts repository](https://github.com/kubernetes/charts) for prior art
 - Wherever possible, ensure that your chart has the option to install the service to be 
