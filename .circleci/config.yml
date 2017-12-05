@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  lint:
     docker:
       - image: quay.io/deis/go-dev:v1.2.0
     steps:
@@ -59,18 +59,34 @@ jobs:
               - master
 workflows:
   version: 2
-  build:
+  test-pr:
     jobs:
-      - build
-  test-install-az-cli:
+      - hold:
+          type: approval
+          filters:
+            branches:
+              ignore: master
+      - lint:
+          requires:
+            - hold
+          filters:
+            branches:
+              ignore: master
+      - test-install-az-cli:
+          requires:
+            - hold
+          filters:
+            branches:
+              ignore: master
+  test-and-deploy-master:
     jobs:
-      - test-install-az-cli
-  build-and-deploy:
-    jobs:
-      - build
+      - lint:
+          filters:
+            branches:
+              only: master
       - helm-sync:
           requires:
-            - build
+            - lint
           filters:
             branches:
               only: master

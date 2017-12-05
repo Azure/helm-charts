@@ -6,26 +6,34 @@
 
 This repository contains [Helm](https://helm.sh/) charts for use with the
 [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-and the Microsoft Azure Service Broker.
+and 
+[Microsoft Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure).
+
+| 🚨  | The project is in **alpha** status. This means that no assurances are made about backwards compatibility or stability until [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) has reached v1. |
+|---|---|
 
 Each chart has one or more dependencies on Azure services (e.g. Azure SQL, CosmosDB, ...)
-which are fulfilled by the [Azure Service Broker](https://github.com/Azure/azure-service-broker) and
+which are fulfilled by [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) and
 the [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog) working
 in tandem.
 
+The following charts are available:
+
+- [Concourse CI](./concourse)
+- [Wordpress](./wordpress)
+- [phpBB](./phpbb)
+- [Drupal](./drupal)
+- [Ghost Blog](./ghost)
+
 # Prerequisites
 
-In order to install any of these charts, you'll need the following:
+You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.7 or later,
+with [Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
+and [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) 
+installed on it.
 
-- A [Kubernetes](https://kubernetes.io) cluster, version 1.7 or above with support for
-    Service Catalog
-    - See 
-    [service-catalog](https://github.com/Azure/helm-charts/tree/master/service-catalog) for
-    more information on how to turn on support for service-catalog
-- [Service Catalog](https://github.com/kubernetes-incubator/service-catalog), version 0.1.0 or above
-    - [Installation documentation](https://github.com/kubernetes-incubator/service-catalog/blob/master/docs/install.md)
-- [Azure Service Broker](https://github.com/Azure/azure-service-broker)
-    - [Installation documentation](https://github.com/Azure/azure-service-broker/blob/master/contrib/k8s/charts/azure-service-broker/README.md)
+Please see [the prerequisities guide](./docs/prerequisities/README.md) for 
+details on how to install all of these prerequisities.
 
 # Installing Charts
 
@@ -54,9 +62,25 @@ Github repository.
 
 # Creating a New Chart
 
+If you have an idea for an application you'd like to see in this repository,
+we'd love to see it! We welcome all pull requests.
 
-If you are looking to create a chart, please see the list of with the `Help Wanted`
-label [here](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
+If you're looking for some ideas for charts to write, we have a list of interesting
+ones under the 
+[`Help Wanted` label](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+in our issues list.
+
+Please follow the below guidelines when creating your new chart.
+
+- Look at the [upstream charts repository](https://github.com/kubernetes/charts) for prior art
+- Wherever possible, ensure that your chart has the option to install the service to be 
+provisioned locally, in the cluster
+    - For example, if your chart provisions Azure MySQL, ensure that the chart can be 
+    installed with the option to create a MySQL instance in the cluster. The default should
+    be to provision on Azure
+- Include a detailed README.md and NOTES.txt file for your chart
+    - [Here](./wordpress/templates/NOTES.txt) is an
+    example of a NOTES.txt file
 
 # Contributing
 

@@ -11,7 +11,7 @@ a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
 
 It is inspired by the 
 [upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/wordpress),
-but, by default, utilizes the Azure Service Broker to provision an 
+but, by default, utilizes Open Service Broker For Azure to provision an 
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
 database for the Wordpress server to use.
 
@@ -27,11 +27,15 @@ $ helm install azure/wordpress
 
 # Prerequisites
 
-To install this chart, you must have:
+You will need the following before you can install this chart:
 
-- Kubernetes 1.7+ with beta APIs enabled
-- [Service-Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- PV provisioner support in the underlying infrastructure
+- Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
+- [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
+- The [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) installed
+- Support for persistent volumes in the underlying infrastructure
+
+Please see the [prerequisities document](../docs/prerequisities/README.md) for
+details on how to install everything.
 
 ## Installing the Chart
 
