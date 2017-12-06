@@ -36,6 +36,16 @@ To install the chart with the release name `my-release`:
 $ helm install --name my-release azure/concourse --namespace concourse
 ```
 
+NOTE: when using minikube, the default memory allocated to the minikube
+virtual machine may not be sufficient to run concourse with the default
+values. You may need to install the chart with fewer workers. This can 
+be done by setting `worker.replicas` to `1`
+ 
+```console
+$ helm install --name my-release azure/concourse --namespace concourse \
+    --set worker.replicas=1
+```
+
 ## Uninstalling the Chart
 
 To uninstall/delete the `my-release` deployment:
