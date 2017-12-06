@@ -75,12 +75,12 @@ spec:
           httpGet:
             path: /ucp.php
             port: http
-          initialDelaySeconds: 120
+          initialDelaySeconds: 600
         readinessProbe:
           httpGet:
             path: /ucp.php
             port: http
-          initialDelaySeconds: 30
+          initialDelaySeconds: 600
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
