@@ -46,7 +46,7 @@ $ helm install --name my-release --namespace wp azure/wordpress
 ```
 
 Note: when installing the wordpress chart on some versions of Minikube, you
-may encounter issues due to https://github.com/kubernetes/minikube/issues/2256. 
+may encounter issues due to [kubernetes/minikube#2256](https://github.com/kubernetes/minikube/issues/2256). 
 In order to successfully install the chart, we recommend using the following flag.
 
 ```console
