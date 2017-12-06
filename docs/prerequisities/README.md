@@ -87,7 +87,7 @@ Otherwise, you'll need to install the Helm componentry onto your cluster
 yourself. Simply run the following commands to complete the installation:
 
 ```console
-kubectl create -f https://github.com/Azure/helm-charts/blob/master/docs/prerequisities/helm-rbac-config.yaml
+kubectl create -f https://raw.githubusercontent.com/Azure/helm-charts/master/docs/prerequisities/helm-rbac-config.yaml
 helm init --service-account tiller
 ```
 
