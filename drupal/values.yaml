@@ -188,7 +188,7 @@ livenessProbe:
   httpGet:
     path: /user/login
     port: http
-  initialDelaySeconds: 120
+  initialDelaySeconds: 600
 readinessProbe:
   httpGet:
     path: /user/login
