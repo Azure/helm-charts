@@ -51,7 +51,7 @@ In order to successfully install the chart, we recommend using the following fla
 
 ```console
 $ helm install --name my-release --namespace wp azure/wordpress \
-    --set persistence.enabled=false
+  --set persistence.enabled=false
 ```
 
 The command deploys WordPress on the Kubernetes cluster in the default 
