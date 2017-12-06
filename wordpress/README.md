@@ -45,6 +45,17 @@ To install the chart with the release name `my-release` in the namespace `wp`:
 $ helm install --name my-release --namespace wp azure/wordpress
 ```
 
+Note: when installing the wordpress chart on some versions of Minikube, you
+may encounter issues due to [kubernetes/minikube#2256](https://github.com/kubernetes/minikube/issues/2256). 
+If you're using
+[v0.24.1](https://github.com/kubernetes/minikube/releases/tag/v0.24.1), we recommend setting
+the `persistence.enabled` parameter to `false` using the following command.
+
+```console
+$ helm install --name my-release --namespace wp azure/wordpress \
+  --set persistence.enabled=false
+```
+
 The command deploys WordPress on the Kubernetes cluster in the default 
 configuration. The [configuration](#configuration) section lists the parameters 
 that can be configured during installation.
