@@ -1,7 +1,7 @@
 ## Bitnami Ghost image version
 ## ref: https://hub.docker.com/r/bitnami/ghost/tags/
 ##
-image: bitnami/ghost:1.17.3-r1
+image: bitnami/ghost:1.18.3-r0
 
 ## Busybox image used to configure volume permissions
 ##
@@ -67,7 +67,15 @@ ghostBlogTitle: User's Blog
 # smtpService:
 
 mysql:
+  ## Whether to fulfill the dependency on MySQL using an embedded (on-cluster)
+  ## MariaDB database _instead of Azure Database for MySQL. This option is
+  ## available to enable local or no-cost evaluation of this chart.
   embeddedMaria: false
+  azure:
+    ## The Azure region in which to deploy Azure Database for MySQL
+    location: eastus
+    ## The plan to request for Azure Database for MySQL
+    servicePlan: standard100
 
 ##
 ## MariaDB chart configuration
