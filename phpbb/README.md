@@ -70,6 +70,7 @@ The following tables lists the configurable parameters of the phpBB chart and th
 | `smtpUser`                        | SMTP user                             | `nil`                                                   |
 | `smtpPassword`                    | SMTP password                         | `nil`                                                   |                                                 |
 | `mysql.embeddedMaria`             | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.                    | `false`
+        |
 | `serviceType`                     | Kubernetes Service type               | `LoadBalancer`                                          |
 | `persistence.enabled`             | Enable persistence using PVC          | `true`                                                  |
 | `persistence.apache.storageClass` | PVC Storage Class for Apache volume   | `nil` (uses alpha storage class annotation)             |
@@ -105,12 +106,10 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 $ helm install --name my-release \
   --set phpbbUser=admin,
   --set phpbbPassword=password \
-  --set mariadb.mariadbRootPassword=secretpassword \
-  --set mariadb.mariadbPassword=Password12
     azure/phpbb
 ```
 
-The above command sets the phpBB administrator account username and password to `admin` and `password` respectively. Additionally it sets the MariaDB `root` user password to `secretpassword` and the MariaDB 
+The above command sets the phpBB administrator account username and password to `admin` and `password` respectively. 
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 

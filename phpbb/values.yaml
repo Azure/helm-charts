@@ -32,6 +32,16 @@ phpbbEmail: user@example.com
 # smtpUser:
 # smtpPassword:
 
+## Azure MySQL configuration. Location and Service Plan are used
+## when embeddedMaria is set to true
+mysql:
+  embeddedMaria: false
+  azure:
+    ## The Azure region in which to deploy Azure Database for MySQL
+    location: eastus
+    ## The plan to request for Azure Database for MySQL
+    servicePlan: standard100
+
 ##
 ## MariaDB chart configuration
 ##
@@ -114,12 +124,4 @@ resources:
     memory: 512Mi
     cpu: 300m
 
-## Azure MySQL configuration. Location and Service Plan are used
-## when embeddedMaria is set to true
-mysql:
-  embeddedMaria: false
-  azure:
-    ## The Azure region in which to deploy Azure Database for MySQL
-    location: eastus
-    ## The plan to request for Azure Database for MySQL
-    servicePlan: standard100
+
