@@ -80,7 +80,7 @@ The following configuration options are utilized only if `mysql.embeddedMaria` i
 | Parameter                         | Description                                           | Default                                                   |
 | --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
 | `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                           |
-| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL      | `standard800`                                             |
+| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL      | `standard100`                                             |
 
 The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
 
