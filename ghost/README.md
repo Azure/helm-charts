@@ -75,6 +75,13 @@ The following tables lists the configurable parameters of the Ghost chart and th
 | `persistence.size`                | PVC Storage Request for Ghost volume                  | `8Gi`                                                     |
 | `resources`                       | CPU/Memory resource requests/limits                   | Memory: `512Mi`, CPU: `300m`                              |
 
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
+
+| Parameter                         | Description                                           | Default                                                   |
+| --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                           |
+| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL      | `standard800`                                             |
+
 The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
 
 | Parameter                         | Description                                           | Default                                                   |
