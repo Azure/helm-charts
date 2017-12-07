@@ -96,7 +96,7 @@ The following tables lists the configurable parameters of the WordPress chart an
 | `smtpPassword`                       | SMTP password                              | `nil`                                                      |
 | `smtpUsername`                       | User name for SMTP emails                  | `nil`                                                      |
 | `smtpProtocol`                       | SMTP protocol [`tls`, `ssl`]               | `nil`                                                      |
-| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL. This option is available to enable local or no-cost evaluation of this chart.            | `false`                                                    | 
+| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.            | `false`                                                    | 
 | `serviceType`                        | Kubernetes Service type                    | `LoadBalancer`                                             |
 | `healthcheckHttps`                   | Use https for liveliness and readiness     | `false`                                             |
 | `ingress.enabled`                    | Enable ingress controller resource         | `false`                                                    |
