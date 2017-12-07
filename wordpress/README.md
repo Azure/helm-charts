@@ -96,7 +96,7 @@ The following tables lists the configurable parameters of the WordPress chart an
 | `smtpPassword`                       | SMTP password                              | `nil`                                                      |
 | `smtpUsername`                       | User name for SMTP emails                  | `nil`                                                      |
 | `smtpProtocol`                       | SMTP protocol [`tls`, `ssl`]               | `nil`                                                      |
-| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Aure Database for MySQL. This option is available to enable local or no-cost evaluation of this chart.            | `false`                                                    | 
+| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.            | `false`                                                    | 
 | `serviceType`                        | Kubernetes Service type                    | `LoadBalancer`                                             |
 | `healthcheckHttps`                   | Use https for liveliness and readiness     | `false`                                             |
 | `ingress.enabled`                    | Enable ingress controller resource         | `false`                                                    |
@@ -113,14 +113,21 @@ The following tables lists the configurable parameters of the WordPress chart an
 | `persistence.size`                   | PVC Storage Request                        | `10Gi`                                                     |
 | `nodeSelector`                       | Node labels for pod assignment             | `{}`                                                       |
 
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
+
+| Parameter                            | Description                                | Default                                                    |
+| -------------------------------      | -------------------------------            | ---------------------------------------------------------- |
+| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                    |
+| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL             | `standard100`                               |
+
 The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
 
 | Parameter                            | Description                                | Default                                                    |
 | -------------------------------      | -------------------------------            | ---------------------------------------------------------- |
 | `mariadb.mariadbRootPassword`        | MariaDB admin password                     | `nil`                                                      |
-| `mariadb.mariadbDatabase`            | Database name to create                    | `bitnami_wordpress`                            |
-| `mariadb.mariadbUser`                | Database user to create                    | `bn_wordpress`                                 |
-| `mariadb.mariadbPassword`            | Password for the database                  | _random 10 character long alphanumeric string_ |
+| `mariadb.mariadbDatabase`            | Database name to create                    | `bitnami_wordpress`                                        |
+| `mariadb.mariadbUser`                | Database user to create                    | `bn_wordpress`                                             |
+| `mariadb.mariadbPassword`            | Password for the database                  | _random 10 character long alphanumeric string_             |
 
 The above parameters map to the env variables defined in [bitnami/wordpress](http://github.com/bitnami/bitnami-docker-wordpress). For more information please refer to the [bitnami/wordpress](http://github.com/bitnami/bitnami-docker-wordpress) image documentation.
 

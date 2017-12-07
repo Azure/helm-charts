@@ -10,9 +10,9 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   clusterServiceClassExternalName: azure-mysqldb
-  clusterServicePlanExternalName: standard800
+  clusterServicePlanExternalName: {{ .Values.mysql.azure.servicePlan }}
   parameters:
-    location: eastus
+    location: {{ .Values.mysql.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
 {{- end }}

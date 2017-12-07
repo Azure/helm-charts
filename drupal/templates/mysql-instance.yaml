@@ -10,9 +10,9 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   clusterServiceClassExternalName: azure-mysqldb
-  clusterServicePlanExternalName: "{{ .Values.mariadb.planName }}"
+  clusterServicePlanExternalName: {{ .Values.mysql.azure.servicePlan }}
   parameters:
-    location: "{{ .Values.mariadb.location }}"
+    location: {{ .Values.mysql.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
 {{- end }}

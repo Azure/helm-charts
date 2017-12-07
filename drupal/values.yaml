@@ -31,30 +31,25 @@ drupalUsername: user
 ##
 drupalEmail: user@example.com
 
-## Set to `yes` to allow the container to be started with blank passwords
-## ref: https://github.com/bitnami/bitnami-docker-wordpress#environment-variables
-allowEmptyPassword: yes
-
 mysql:
+  ## Whether to fulfill the dependency on MySQL using an embedded (on-cluster)
+  ## MariaDB database _instead of Azure Database for MySQL. This option is
+  ## available to enable local or no-cost evaluation of this chart.
   embeddedMaria: false
+  azure:
+    ## The Azure region in which to deploy Azure Database for MySQL
+    location: eastus
+    ## The plan to request for Azure Database for MySQL
+    servicePlan: standard100
 
 ##
 ## MariaDB chart configuration
 ##
 mariadb:
-  ## Whether to use the database specified as a requirement or not. For example, to configure the chart with an existing database server.
-  enabled: true
-
   ## MariaDB admin password
   ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#setting-the-root-password-on-first-run
   ##
   # mariadbRootPassword:
-
-  ## Related to the Azure Service Broker
-  # Plan to use for the MySQL Instance
-  planName: standard800
-  # Azure Location where to deploy the instance
-  location: eastus
 
   ## Create a database
   ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-on-first-run
@@ -111,7 +106,7 @@ ingress:
   ## Secrets must be manually created in the namespace
   ##
   # tls:
-  #   - secretName: wordpress.local-tls
+  #   - secretName: drupal.local-tls
   #     hosts:
   #       - drupal.local
 
@@ -193,7 +188,7 @@ livenessProbe:
   httpGet:
     path: /user/login
     port: http
-  initialDelaySeconds: 120
+  initialDelaySeconds: 600
 readinessProbe:
   httpGet:
     path: /user/login
