@@ -75,18 +75,12 @@ The following tables lists the configurable parameters of the Drupal chart and t
 | `drupalUsername`                  | User of the application               | `user`                                                    |
 | `drupalPassword`                  | Application password                  | _random 10 character long alphanumeric string_            |
 | `drupalEmail`                     | Admin email                           | `user@example.com`                                        |
-| `allowEmptyPassword`              | Allow DB blank passwords              | `yes`                                                     |
 | `extraVars`                       | Extra environment variables           | `nil`                                                     |
 | `ingress.annotations`             | Specify ingress class                 | `kubernetes.io/ingress.class: nginx`                      |
 | `ingress.enabled`                 | Enable ingress controller resource    | `false`                                                   |
 | `ingress.hostname`                | URL for your Drupal installation      | `drupal.local`                                            |
 | `ingress.tls`                     | Ingress TLS configuration             | `[]`                                                      |
-| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Aure Database for MySQL. This option is available to enable local or no-cost evaluation of this chart.            | `false`
-| `mariadb.enabled`                 | Use or not the mariadb chart          | `true`                                                    |
-| `mariadb.mariadbRootPassword`     | MariaDB admin password                | `nil`                                                     |
-| `mariadb.mariadbDatabase`         | Database name to create               | `bitnami_drupal`                                          |
-| `mariadb.mariadbUser`             | Database user to create               | `bn_drupal`                                               |
-| `mariadb.mariadbPassword`         | Password for the database             | _random 10 character long alphanumeric string_            |
+| `mysql.embeddedMaria`             | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart. | `false` |
 | `serviceType`                     | Kubernetes Service type               | `LoadBalancer`                                            |
 | `persistence.enabled`             | Enable persistence using PVC          | `true`                                                    |
 | `persistence.apache.storageClass` | PVC Storage Class for Apache volume   | `nil` (uses alpha storage class annotation)               |
@@ -100,6 +94,22 @@ The following tables lists the configurable parameters of the Drupal chart and t
 | `resources`                       | CPU/Memory resource requests/limits   | Memory: `512Mi`, CPU: `300m`                              |
 | `volumeMounts.drupal.mountPath`   | Drupal data volume mount path         | `/bitnami/drupal`                                         |
 | `volumeMounts.apache.mountPath`   | Apache data volume mount path         | `/bitnami/apache`                                         |
+
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
+
+| Parameter                         | Description                           | Default                                                   |
+| --------------------------------- | ------------------------------------- | --------------------------------------------------------- |
+| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                           |
+| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL             | `standard100`                      |
+
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
+
+| Parameter                         | Description                           | Default                                                   |
+| --------------------------------- | ------------------------------------- | --------------------------------------------------------- |
+| `mariadb.mariadbRootPassword`     | MariaDB admin password                | `nil`                                                     |
+| `mariadb.mariadbDatabase`         | Database name to create               | `bitnami_drupal`                                          |
+| `mariadb.mariadbUser`             | Database user to create               | `bn_drupal`                                               |
+| `mariadb.mariadbPassword`         | Password for the database             | _random 10 character long alphanumeric string_            |
 
 The above parameters map to the env variables defined in [bitnami/drupal](http://github.com/bitnami/bitnami-docker-drupal). For more information please refer to the [bitnami/drupal](http://github.com/bitnami/bitnami-docker-drupal) image documentation.
 

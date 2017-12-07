@@ -56,7 +56,7 @@ export APP_PORT={{ default "80" .Values.servicePort  }}
   echo Password: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "ghost.fullname" . }} -o jsonpath="{.data.ghost-password}" | base64 --decode)
 
 3. Navigate to ghost using a browser:
-With the values obtained from previous setp
+With the values obtained from previous step
 http://{APP_HOST}:{APP_PORT}
 
 Sign in using the admin account:

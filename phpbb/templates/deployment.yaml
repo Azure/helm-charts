@@ -75,7 +75,7 @@ spec:
           httpGet:
             path: /ucp.php
             port: http
-          initialDelaySeconds: 120
+          initialDelaySeconds: 600
         readinessProbe:
           httpGet:
             path: /ucp.php

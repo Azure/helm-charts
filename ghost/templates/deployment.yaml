@@ -33,13 +33,6 @@ spec:
           value: {{ template "ghost.mariadb.fullname" . }}
         - name: MARIADB_PORT_NUMBER
           value: "3306"
-        - name: MARIADB_ROOT_PASSWORD
-          value: {{ default "" .Values.mariadb.mariadbRootPassword | quote }}
-        - name: MARIADB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "ghost.mariadb.fullname" . }}
-              key: mariadb-root-password
         - name: GHOST_DATABASE_NAME
           value: {{ default "" .Values.mariadb.mariadbDatabase | quote }}
         - name: GHOST_DATABASE_USER
