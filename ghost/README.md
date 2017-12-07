@@ -86,6 +86,7 @@ The following configuration options are utilized only if `mysql.embeddedMaria` i
 
 | Parameter                         | Description                                           | Default                                                   |
 | --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| `mariadb.mariadbRootPassword`     | MariaDB admin password                                | `nil`                                                     |
 | `mariadb.mariadbDatabase`         | Database name to create                               | `bitnami_ghost`                                           |
 | `mariadb.mariadbUser`             | Database user to create                               | `bn_ghost`                                                |
 | `mariadb.mariadbPassword`         | Password for the database                             | _random 10 character long alphanumeric string_            |
