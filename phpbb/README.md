@@ -68,8 +68,8 @@ The following tables lists the configurable parameters of the phpBB chart and th
 | `smtpHost`                        | SMTP host                             | `nil`                                                   |
 | `smtpPort`                        | SMTP port                             | `nil`                                                   |
 | `smtpUser`                        | SMTP user                             | `nil`                                                   |
-| `smtpPassword`                    | SMTP password                         | `nil`                                                   |
-| `mariadb.mariadbRootPassword`     | MariaDB admin password                | `nil`                                                   |
+| `smtpPassword`                    | SMTP password                         | `nil`                                                   |                                                 |
+| `mysql.embeddedMaria`             | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.                    | `false`
 | `serviceType`                     | Kubernetes Service type               | `LoadBalancer`                                          |
 | `persistence.enabled`             | Enable persistence using PVC          | `true`                                                  |
 | `persistence.apache.storageClass` | PVC Storage Class for Apache volume   | `nil` (uses alpha storage class annotation)             |
@@ -80,17 +80,37 @@ The following tables lists the configurable parameters of the phpBB chart and th
 | `persistence.phpbb.size`          | PVC Storage Request for phpBB volume  | `8Gi`                                                   |
 | `resources`                       | CPU/Memory resource requests/limits   | Memory: `512Mi`, CPU: `300m`                            |
 
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
+
+| Parameter                         | Description                                           | Default                                                   |
+| --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                           |
+| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL      | `standard100`                                             |
+
+The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
+
+| Parameter                         | Description                                           | Default                                                   |
+| --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| `mariadb.mariadbRootPassword`     | MariaDB admin password                                | `nil`                                                     |
+| `mariadb.mariadbDatabase`         | Database name to create                               | `bitnami_phpbb`                                           |
+| `mariadb.mariadbUser`             | Database user to create                               | `bn_phpbb`                                                |
+| `mariadb.mariadbPassword`         | Password for the database                             | _random 10 character long alphanumeric string_            |
+
+
 The above parameters map to the env variables defined in [bitnami/phpbb](http://github.com/bitnami/bitnami-docker-phpbb). For more information please refer to the [bitnami/phpbb](http://github.com/bitnami/bitnami-docker-phpbb) image documentation.
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
 $ helm install --name my-release \
-  --set phpbbUser=admin,phpbbPassword=password,mariadb.mariadbRootPassword=secretpassword \
+  --set phpbbUser=admin,
+  --set phpbbPassword=password \
+  --set mariadb.mariadbRootPassword=secretpassword \
+  --set mariadb.mariadbPassword=Password12
     azure/phpbb
 ```
 
-The above command sets the phpBB administrator account username and password to `admin` and `password` respectively. Additionally it sets the MariaDB `root` user password to `secretpassword`.
+The above command sets the phpBB administrator account username and password to `admin` and `password` respectively. Additionally it sets the MariaDB `root` user password to `secretpassword` and the MariaDB 
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 

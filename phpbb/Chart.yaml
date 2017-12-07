@@ -1,6 +1,6 @@
 name: phpbb
-version: 0.1.0
-appVersion: 3.2.1
+version: 0.2.0
+appVersion: 3.2.1-r2
 description: Community forum that supports the notion of users and groups, file attachments,
   full-text search, notifications and more.
 keywords:
@@ -15,4 +15,6 @@ sources:
 maintainers:
 - name: Julien Stroheker
   email: juliens@microsoft.com
+- name: Jeremy Rickard
+  email: jeremy.rickard@microsoft.com
 engine: gotpl

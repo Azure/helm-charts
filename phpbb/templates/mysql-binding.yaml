@@ -1,3 +1,4 @@
+{{- if not .Values.mysql.embeddedMaria }}
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceBinding
 metadata:
@@ -11,3 +12,4 @@ spec:
   instanceRef:
     name: {{ template "phpbb.fullname" . }}-mysql-instance
   secretName: {{ template "phpbb.fullname" . }}-mysql-secret
+{{- end }}
