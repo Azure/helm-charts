@@ -32,8 +32,15 @@ phpbbEmail: user@example.com
 # smtpUser:
 # smtpPassword:
 
+## Azure MySQL configuration. Location and Service Plan are used
+## when embeddedMaria is set to true
 mysql:
   embeddedMaria: false
+  azure:
+    ## The Azure region in which to deploy Azure Database for MySQL
+    location: eastus
+    ## The plan to request for Azure Database for MySQL
+    servicePlan: standard100
 
 ##
 ## MariaDB chart configuration
@@ -44,11 +51,21 @@ mariadb:
   ##
   # mariadbRootPassword:
 
-  ## Related to the Azure Service Broker
-  # Plan to use for the MySQL Instance
-  planName: standard800
-  # Azure Location where to deploy the instance
-  location: eastus
+
+  ## Create a database
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-on-first-run
+  ##
+  mariadbDatabase: bitnami_phpbb
+
+  ## Create a database user
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  mariadbUser: bn_phpbb
+
+  ## Password for mariadbUser
+  ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#creating-a-database-user-on-first-run
+  ##
+  # mariadbPassword:
 
   ## Enable persistence using Persistent Volume Claims
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
@@ -106,4 +123,5 @@ resources:
   requests:
     memory: 512Mi
     cpu: 300m
-    
+
+
