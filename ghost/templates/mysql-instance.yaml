@@ -15,4 +15,6 @@ spec:
     location: {{ .Values.mysql.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
+    firewallStartIPAddress: 0.0.0.0
+    firewallEndIPAddress: 255.255.255.255
 {{- end }}
