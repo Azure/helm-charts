@@ -89,6 +89,7 @@ yourself. Simply run the following commands to complete the installation:
 ```console
 kubectl create -f https://raw.githubusercontent.com/Azure/helm-charts/master/docs/prerequisities/helm-rbac-config.yaml
 helm init --service-account tiller
+helm init --upgrade
 ```
 
 # Step 3: Install Service Catalog
