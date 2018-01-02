@@ -72,32 +72,55 @@ KUBECONFIG=$KUBECONFIG_PATH:_output/$CLUSTER_NAME/kubeconfig/kubeconfig.$REGION.
 
 ## Azure Container Service (AKS)
 
-Currently, AKS does not support aggregated APIs, which are required for 
-service-catalog installation.
-
-Support is forthcoming, and this document will be updated when aggregated APIs 
-are supported.
+If you would like to use Service Catalog and Open Service Broker for Azure work 
+with  Managed Kubernetes for Azure Container Service (AKS), see the AKS 
+[quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough).
 
 # Step 2: Initialize Helm on the Cluster
 
-If you created your Kubernetes cluster using `acs-engine` in the previous step, Helm
-is already installed and you can skip this section.
+Installing Service Catalog and Open Service Broker for Azure is accomplished 
+using Helm. If you created your Kubernetes cluster using `acs-engine` in the previous step,
+Helm is already installed. However, you may need to upgrade the Tiller 
+component. To check the version, use the `helm version` command. You need 
+helm version `2.7.0` or later in order to install Service Catalog and Open
+Service Broker for Azure. If you need to updgrade Helm, you can up[grade Tiller
+by executing the following command:
+
+```console
+helm init --upgrade
+```
+
 
 Otherwise, you'll need to install the Helm componentry onto your cluster 
-yourself. Simply run the following commands to complete the installation:
+yourself. 
 
+If you are using Minikube, run the following commands to complete the installation:
 ```console
 kubectl create -f https://raw.githubusercontent.com/Azure/helm-charts/master/docs/prerequisities/helm-rbac-config.yaml
 helm init --service-account tiller
-helm init --upgrade
 ```
+
+Note: Currently, AKS does not support Role Based Access Control (RBAC).
+If you are using AKS, you will need to install Helm without RBAC:
+```console
+helm init
+```
+
 
 # Step 3: Install Service Catalog
 
 After you've successfully installed your Kubernetes cluster and installed Helm, 
 you'll need to install Service Catalog.
 
-Do so by executing the following command:
+To install Service Catalog on an AKS cluster, excute the following commands:
+
+```console
+helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+helm install svc-cat/catalog --name catalog --namespace catalog --set rbacEnable=false
+```
+Note: when using AKS, you must disable RBAC as shown above.
+
+Otherwise, execute the following commands:
 
 ```console
 helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
