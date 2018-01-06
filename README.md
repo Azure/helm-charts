@@ -1,12 +1,10 @@
-# Helm Charts for Kubernetes Service Catalog on Azure
+# Helm charts for Kubernetes Service Catalog on Azure
 
 [![CircleCI](https://circleci.com/gh/Azure/helm-charts.svg?style=svg&circle-token=e8c9c6863d2aac35c678888ca7346618be17aeb8)](https://circleci.com/gh/Azure/helm-charts)
 
-# Overview
-
 This repository contains [Helm](https://helm.sh/) charts for use with the
 [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-and 
+and
 [Microsoft Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure).
 
 | 🚨  | The project is in **alpha** status. This means that no assurances are made about backwards compatibility or stability until [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) has reached v1. |
@@ -20,25 +18,25 @@ in tandem.
 The following charts are available:
 
 - [Concourse CI](./concourse)
-- [Wordpress](./wordpress)
-- [phpBB](./phpbb)
 - [Drupal](./drupal)
 - [Ghost Blog](./ghost)
+- [phpBB](./phpbb)
+- [Wordpress](./wordpress)
 
-# Prerequisites
+## Prerequisites
 
 You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.7 or later,
 with [Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
-and [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) 
+and [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure)
 installed on it.
 
-Please see [the prerequisities guide](./docs/prerequisities/README.md) for 
+Please see the [prerequisities guide](./docs/prerequisities/README.md) for
 details on how to install all of these prerequisities.
 
-# Installing Charts
+## Installing charts
 
-All of the charts herein are stored in a 
-[Helm chart repository](https://github.com/kubernetes/helm/blob/master/docs/chart_repository.md). 
+All of the charts herein are stored in a
+[Helm chart repository](https://github.com/kubernetes/helm/blob/master/docs/chart_repository.md).
 
 First, add the Azure charts repository to your local list:
 
@@ -50,39 +48,37 @@ After you've added the Azure charts repository, you'll have access to the charts
 For example, you can search for charts:
 
 ```console
-$helm search wordpress
+$ helm search wordpress
 NAME            	VERSION	DESCRIPTION
 azure/wordpress 	0.6.12 	Web publishing platform for building blogs and ...
 local/wordpress 	0.6.12 	Web publishing platform for building blogs and ...
 stable/wordpress	0.6.10 	Web publishing platform for building blogs and ...
 ```
 
-Notice that `azure/wordpress` is listed above. This is the chart that you see in this
-Github repository.
+The `azure/wordpress` chart shown in the output above is the chart that you see in this Github repository.
 
-# Creating a New Chart
+## Creating a new chart
 
 If you have an idea for an application you'd like to see in this repository,
 we'd love to see it! We welcome all pull requests.
 
 If you're looking for some ideas for charts to write, we have a list of interesting
-ones under the 
-[`Help Wanted` label](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-in our issues list.
+ones under the
+[`Help Wanted`](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+label in our issues list.
 
-Please follow the below guidelines when creating your new chart.
+Please follow these guidelines when creating your new chart:
 
 - Look at the [upstream charts repository](https://github.com/kubernetes/charts) for prior art
-- Wherever possible, ensure that your chart has the option to install the service to be 
+- Wherever possible, ensure that your chart has the option to install the service to be
 provisioned locally, in the cluster
-    - For example, if your chart provisions Azure MySQL, ensure that the chart can be 
+    - For example, if your chart provisions Azure MySQL, ensure that the chart can be
     installed with the option to create a MySQL instance in the cluster. The default should
     be to provision on Azure
 - Include a detailed README.md and NOTES.txt file for your chart
-    - [Here](./wordpress/templates/NOTES.txt) is an
-    example of a NOTES.txt file
+    - Example [README.md](./wordpress/README.md) and [NOTES.txt](./wordpress/templates/NOTES.txt)
 
-# Contributing
+## Contributing
 
 For details on how to contribute to this project, please see [contributing.md](./docs/contributing.md).
 
