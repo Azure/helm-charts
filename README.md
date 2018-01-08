@@ -1,4 +1,4 @@
-# Helm charts for Kubernetes Service Catalog on Azure
+# Helm Charts for Kubernetes Service Catalog on Azure
 
 [![CircleCI](https://circleci.com/gh/Azure/helm-charts.svg?style=svg&circle-token=e8c9c6863d2aac35c678888ca7346618be17aeb8)](https://circleci.com/gh/Azure/helm-charts)
 
@@ -33,7 +33,7 @@ installed on it.
 Please see the [prerequisities guide](./docs/prerequisities/README.md) for
 details on how to install all of these prerequisities.
 
-## Installing charts
+## Installing Charts
 
 All of the charts herein are stored in a
 [Helm chart repository](https://github.com/kubernetes/helm/blob/master/docs/chart_repository.md).
@@ -57,7 +57,7 @@ stable/wordpress	0.6.10 	Web publishing platform for building blogs and ...
 
 The `azure/wordpress` chart shown in the output above is the chart that you see in this Github repository.
 
-## Creating a new chart
+## Creating a New Chart
 
 If you have an idea for an application you'd like to see in this repository,
 we'd love to see it! We welcome all pull requests.
