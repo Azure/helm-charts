@@ -3,7 +3,7 @@
 [Magento](https://magento.org/) is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
 
 It is inspired by the
-[upstream magento chart](https://github.com/kubernetes/charts/tree/master/stable/magento,
+[upstream magento chart](https://github.com/kubernetes/charts/tree/master/stable/magento),
 but, by default, utilizes Open Service Broker for Azure to provision an
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
 database for the Magento server to use.
