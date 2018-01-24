@@ -82,7 +82,7 @@ using Helm. If you created your Kubernetes cluster using `acs-engine` in the pre
 Helm is already installed. However, you may need to upgrade the Tiller 
 component. To check the version, use the `helm version` command. You need 
 helm version `2.7.0` or later in order to install Service Catalog and Open
-Service Broker for Azure. If you need to updgrade Helm, you can up[grade Tiller
+Service Broker for Azure. If you need to upgrade Helm, you can upgrade Tiller
 by executing the following command:
 
 ```console
@@ -112,7 +112,7 @@ helm init
 After you've successfully installed your Kubernetes cluster and installed Helm, 
 you'll need to install Service Catalog.
 
-To install Service Catalog on an AKS cluster, excute the following commands:
+To install Service Catalog on an AKS cluster, execute the following commands:
 
 ```console
 helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
