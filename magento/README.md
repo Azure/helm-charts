@@ -27,7 +27,7 @@ You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- [Open Service Broker for Azure](https://github.com/Azure/azure-service-broker) installed
+- [Open Service Broker for Azure](https://github.com/Azure/azure-service-broker) installed and up-to-date
 - Support for persistent volumes in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for
@@ -45,7 +45,7 @@ The command deploys Magento on the Kubernetes cluster in the default configurati
 
 > **Tip**: List all releases using `helm list`
 
-> **Note**: On average, installation takes more than 20 minutes. Please be patient.
+> **Note**: On average, installation takes more than 25 minutes. Please be patient.
 
 ## Uninstalling the Chart
 

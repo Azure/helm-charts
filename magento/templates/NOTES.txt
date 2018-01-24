@@ -26,7 +26,7 @@ host. To configure Magento with the URL of your service:
   {{- end }}
 
 2. Complete your Magento deployment by running:
-
+ 
   helm upgrade {{ .Release.Name }} \
     --set magentoHost=$APP_HOST,magentoPassword=$APP_PASSWORD{{ if .Values.mariadb.mariadbRootPassword }},mariadb.mariadbRootPassword=$APP_DATABASE_PASSWORD{{ end }} azure/magento
 

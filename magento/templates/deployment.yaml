@@ -56,6 +56,15 @@ spec:
               name: {{ template "magento.fullname" . }}-mysql-secret
               key: database
         {{- end }}
+        - name: MAGENTO_HOST
+          value: {{ include "magento.host" . | quote }}
+        - name: MAGENTO_USERNAME
+          value: {{ .Values.magentoUsername | quote }}
+        - name: MAGENTO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}
+              key: magento-password
         - name: MAGENTO_EMAIL
           value: {{ default "" .Values.magentoEmail | quote }}
         - name: MAGENTO_ADMINURI
@@ -66,12 +75,6 @@ spec:
           value: {{ default "" .Values.magentoLastName | quote }}
         - name: MAGENTO_MODE
           value: {{ default "" .Values.magentoMode | quote }}
-        - name: NAMI_DEBUG # tracing Bitnami deployments
-          value: "1"
-        - name: NAMI_LOG_LEVEL # tracing Bitnami deployments
-          value: "trace"
-        - name: BASH_DEBUG # tracing Bitnami deployments
-          value: "1"
         ports:
         - name: http
           containerPort: 80
@@ -84,7 +87,7 @@ spec:
             httpHeaders:
             - name: Host
               value: {{ include "magento.host" . | quote }}
-          initialDelaySeconds: 1800 # Installation takes time. Avoid eager termination by the kubelet by setting a high value.
+          initialDelaySeconds: 1500 # Installation takes time. Avoid eager termination by the kubelet by setting a high value.
           timeoutSeconds: 5
           failureThreshold: 6
         readinessProbe:
@@ -94,7 +97,7 @@ spec:
             httpHeaders:
             - name: Host
               value: {{ include "magento.host" . | quote }}
-          initialDelaySeconds: 30
+          initialDelaySeconds: 1000 # Installation takes time. Avoid probing too early.
           timeoutSeconds: 3
           periodSeconds: 5
         resources:
