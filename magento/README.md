@@ -2,7 +2,7 @@
 
 [Magento](https://magento.org/) is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
 
-It is inspired by the
+This chart is inspired by the
 [upstream magento chart](https://github.com/kubernetes/charts/tree/master/stable/magento),
 but, by default, utilizes Open Service Broker for Azure to provision an
 [Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/)
@@ -19,7 +19,6 @@ $ helm install azure/magento
 
 This chart bootstraps a [Magento](https://github.com/bitnami/bitnami-docker-magento) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-It also packages the [Bitnami MariaDB chart](https://github.com/kubernetes/charts/tree/master/stable/mariadb) which is required for bootstrapping a MariaDB deployment for the database requirements of the Magento application.
 
 ## Prerequisites
 
@@ -38,7 +37,7 @@ details on how to install everything.
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm install --name my-release --namespace magento azure/magento
+$ helm install --name my-release azure/magento
 ```
 
 The command deploys Magento on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -74,8 +73,13 @@ The following tables lists the configurable parameters of the Magento chart and 
 | `magentoLastName`                  | Magento Admin Last Name                  | `LastName`                                               |
 | `magentoMode`                      | Magento mode                             | `developer`                                              |
 | `magentoAdminUri`                  | Magento prefix to access Magento Admin   | `admin`                                                  |
+| `externalDatabase.azure.location`  | The Azure region in which to deploy Azure Database for MySQL | `eastus`                             |
+| `externalDatabase.azure.servicePlan` | The plan to request for Azure Database for MySQL | `standard100`                                  |
+| `mariadb.enabled`                  | Use or not the mariadb chart             | `false`                                                   |
 | `mariadb.mariadbRootPassword`      | MariaDB admin password                   | `nil`                                                    |
-| `mysql.embeddedMaria`             | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart. | `false` |
+| `mariadb.mariadbDatabase`          | Database name to create                  | `bitnami_magento`                                        |
+| `mariadb.mariadbUser`              | Database user to create                  | `bn_magento`                                             |
+| `mariadb.mariadbPassword`          | Password for the database                | _random 10 character long alphanumeric string_           |
 | `serviceType`                      | Kubernetes Service type                  | `LoadBalancer`                                           |
 | `persistence.enabled`              | Enable persistence using PVC             | `true`                                                   |
 | `persistence.apache.storageClass`  | PVC Storage Class for Apache volume      | `nil`  (uses alpha storage annotation)                                              |
@@ -85,23 +89,6 @@ The following tables lists the configurable parameters of the Magento chart and 
 | `persistence.magento.accessMode`   | PVC Access Mode for Magento volume       | `ReadWriteOnce`                                          |
 | `persistence.magento.size`         | PVC Storage Request for Magento volume   | `8Gi`                                                    |
 | `resources`                        | CPU/Memory resource requests/limits      | Memory: `512Mi`, CPU: `300m`                             |
-
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
-
-| Parameter                         | Description                           | Default                                                   |
-| --------------------------------- | ------------------------------------- | --------------------------------------------------------- |
-| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `westeurope`                           |
-| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL             | `standard100`                      |
-
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
-
-| Parameter                         | Description                           | Default                                                   |
-| --------------------------------- | ------------------------------------- | --------------------------------------------------------- |
-| `mariadb.mariadbRootPassword`     | MariaDB admin password                | `nil`                                                     |
-| `mariadb.mariadbDatabase`         | Database name to create               | `bitnami_magento`                                          |
-| `mariadb.mariadbUser`             | Database user to create               | `bn_dmagento`                                               |
-| `mariadb.mariadbPassword`         | Password for the database             | _random 10 character long alphanumeric string_            |
-
 
 The above parameters map to the env variables defined in [bitnami/magento](http://github.com/bitnami/bitnami-docker-magento). For more information please refer to the [bitnami/magento](http://github.com/bitnami/bitnami-docker-magento) image documentation.
 
@@ -123,16 +110,16 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 
 ```console
 $ helm install --name my-release \
-  --set magentoUsername=admin,magentoPassword=password,mariadb.mariadbRootPassword=secretpassword \
-    stable/magento
+  --set magentoUsername=admin,magentoPassword=password \
+    azure/magento
 ```
 
-The above command sets the Magento administrator account username and password to `admin` and `password` respectively. Additionally it sets the MariaDB `root` user password to `secretpassword`.
+The above command sets the Magento administrator account username and password to `admin` and `password` respectively.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```console
-$ helm install --name my-release -f values.yaml stable/magento
+$ helm install --name my-release -f values.yaml azure/magento
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
