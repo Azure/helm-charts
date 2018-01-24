@@ -1,0 +1,125 @@
+{{- if include "magento.host" . -}}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "magento.fullname" . }}
+  labels:
+    app: {{ template "magento.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "magento.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "magento.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        {{- if .Values.mysql.embeddedMaria }}
+        - name: MARIADB_HOST
+          value: {{ template "magento.mariadb.fullname" . }}
+        - name: MARIADB_PORT_NUMBER
+          value: "3306"
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.mariadb.fullname" . }}
+              key: mariadb-root-password
+        {{- else }}
+        - name: MARIADB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}-mysql-secret
+              key: host
+        - name: MARIADB_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}-mysql-secret
+              key: port
+        - name: MAGENTO_DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}-mysql-secret
+              key: username
+        - name: MAGENTO_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}-mysql-secret
+              key: password
+        - name: MAGENTO_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}-mysql-secret
+              key: database
+        {{- end }}
+        - name: MAGENTO_HOST
+          value: {{ include "magento.host" . | quote }}
+        - name: MAGENTO_USERNAME
+          value: {{ .Values.magentoUsername | quote }}
+        - name: MAGENTO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "magento.fullname" . }}
+              key: magento-password
+        - name: MAGENTO_EMAIL
+          value: {{ default "" .Values.magentoEmail | quote }}
+        - name: MAGENTO_ADMINURI
+          value: {{ default "" .Values.magentoAdminUri | quote }}
+        - name: MAGENTO_FIRSTNAME
+          value: {{ default "" .Values.magentoFirstName | quote }}
+        - name: MAGENTO_LASTNAME
+          value: {{ default "" .Values.magentoLastName | quote }}
+        - name: MAGENTO_MODE
+          value: {{ default "" .Values.magentoMode | quote }}
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /index.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: {{ include "magento.host" . | quote }}
+          initialDelaySeconds: 1500 # Installation takes time. Avoid eager termination by the kubelet by setting a high value.
+          timeoutSeconds: 5
+          failureThreshold: 6
+        readinessProbe:
+          httpGet:
+            path: /index.php
+            port: http
+            httpHeaders:
+            - name: Host
+              value: {{ include "magento.host" . | quote }}
+          initialDelaySeconds: 1000 # Installation takes time. Avoid probing too early.
+          timeoutSeconds: 3
+          periodSeconds: 5
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        volumeMounts:
+        - name: magento-data
+          mountPath: /bitnami/magento
+        - name: apache-data
+          mountPath: /bitnami/apache
+      volumes:
+      - name: magento-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "magento.fullname" . }}-magento
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      - name: apache-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "magento.fullname" . }}-apache
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+{{- end -}}
