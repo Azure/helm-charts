@@ -1,23 +1,10 @@
 # WordPress
 
-[WordPress](https://wordpress.org/) is one of the most versatile open source 
-content management and publishing platforms on the market for building blogs 
-and websites.
+[WordPress](https://wordpress.org/) is one of the most versatile open source content management systems on the market. A publishing platform for building blogs and websites.
 
-This chart bootstraps a 
-[WordPress](https://github.com/bitnami/bitnami-docker-wordpress) deployment on 
-a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh)
- package manager.
+## TL;DR;
 
-It is inspired by the 
-[upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/wordpress),
-but, by default, utilizes Open Service Broker For Azure to provision an 
-[Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
-database for the Wordpress server to use.
-
-# Basic Installation
-
-Installation of this chart is simple. First, ensure that you've [added the
+First, ensure that you've [added the
 `azure` repository](../README.md#installing-charts). Then, install from the
 `azure` repo:
 
@@ -25,24 +12,35 @@ Installation of this chart is simple. First, ensure that you've [added the
 $ helm install azure/wordpress
 ```
 
-# Prerequisites
+## Introduction
+
+This chart bootstraps a [WordPress](https://github.com/bitnami/bitnami-docker-wordpress) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+It is inspired by the 
+[upstream wordpress chart](https://github.com/kubernetes/charts/tree/master/stable/wordpress),
+but, by default, utilizes Open Service Broker For Azure to provision an 
+[Azure Database for MySQL](https://azure.microsoft.com/en-us/services/mysql/) 
+database for the Wordpress server to use.
+
+
+## Prerequisites
 
 You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
 - The [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) installed
-- Support for persistent volumes in the underlying infrastructure
+- PV provisioner support in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for
 details on how to install everything.
 
 ## Installing the Chart
 
-To install the chart with the release name `my-release` in the namespace `wp`:
+To install the chart with the release name `my-release`:
 
 ```console
-$ helm install --name my-release --namespace wp azure/wordpress
+$ helm install --name my-release azure/wordpress
 ```
 
 Note: when installing the wordpress chart on some versions of Minikube, you
@@ -56,9 +54,7 @@ $ helm install --name my-release --namespace wp azure/wordpress \
   --set persistence.enabled=false
 ```
 
-The command deploys WordPress on the Kubernetes cluster in the default 
-configuration. The [configuration](#configuration) section lists the parameters 
-that can be configured during installation.
+The command deploys WordPress on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -71,9 +67,6 @@ $ helm delete my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
-
-You also may want to use the `--purge` command line flag to delete the release
-name from the helm deployments list.
 
 ## Configuration
 
@@ -96,11 +89,18 @@ The following tables lists the configurable parameters of the WordPress chart an
 | `smtpPassword`                       | SMTP password                              | `nil`                                                      |
 | `smtpUsername`                       | User name for SMTP emails                  | `nil`                                                      |
 | `smtpProtocol`                       | SMTP protocol [`tls`, `ssl`]               | `nil`                                                      |
-| `mysql.embeddedMaria`                | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.            | `false`                                                    | 
+| `mariadb.enabled`                    | Deploy MariaDB container(s)                | `false`                                                    |
+| `mariadb.mariadbRootPassword`        | MariaDB admin password                     | `nil`                                                      |
+| `mariadb.mariadbDatabase`            | Database name to create                    | `bitnami_wordpress`                                        |
+| `mariadb.mariadbUser`                | Database user to create                    | `bn_wordpress`                                             |
+| `mariadb.mariadbPassword`            | Password for the database                  | _random 10 character long alphanumeric string_             |
+| `externalDatabase.azure.location`    | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                 |
+| `externalDatabase.azure.servicePlan` | The plan to request for Azure Database for MySQL | `standard100`                                        |
 | `serviceType`                        | Kubernetes Service type                    | `LoadBalancer`                                             |
-| `healthcheckHttps`                   | Use https for liveliness and readiness     | `false`                                             |
+| `healthcheckHttps`                   | Use https for liveliness and readiness     | `false`                                                    |
 | `ingress.enabled`                    | Enable ingress controller resource         | `false`                                                    |
 | `ingress.hosts[0].name`              | Hostname to your WordPress installation    | `wordpress.local`                                          |
+| `ingress.hosts[0].path`              | Path within the url structure              | `/`                                                        |
 | `ingress.hosts[0].tls`               | Utilize TLS backend in ingress             | `false`                                                    |
 | `ingress.hosts[0].tlsSecret`         | TLS Secret (certificates)                  | `wordpress.local-tls-secret`                               |
 | `ingress.hosts[0].annotations`       | Annotations for this host's ingress record | `[]`                                                       |
@@ -112,22 +112,6 @@ The following tables lists the configurable parameters of the WordPress chart an
 | `persistence.accessMode`             | PVC Access Mode                            | `ReadWriteOnce`                                            |
 | `persistence.size`                   | PVC Storage Request                        | `10Gi`                                                     |
 | `nodeSelector`                       | Node labels for pod assignment             | `{}`                                                       |
-
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
-
-| Parameter                            | Description                                | Default                                                    |
-| -------------------------------      | -------------------------------            | ---------------------------------------------------------- |
-| `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                    |
-| `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL             | `standard100`                               |
-
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
-
-| Parameter                            | Description                                | Default                                                    |
-| -------------------------------      | -------------------------------            | ---------------------------------------------------------- |
-| `mariadb.mariadbRootPassword`        | MariaDB admin password                     | `nil`                                                      |
-| `mariadb.mariadbDatabase`            | Database name to create                    | `bitnami_wordpress`                                        |
-| `mariadb.mariadbUser`                | Database user to create                    | `bn_wordpress`                                             |
-| `mariadb.mariadbPassword`            | Password for the database                  | _random 10 character long alphanumeric string_             |
 
 The above parameters map to the env variables defined in [bitnami/wordpress](http://github.com/bitnami/bitnami-docker-wordpress). For more information please refer to the [bitnami/wordpress](http://github.com/bitnami/bitnami-docker-wordpress) image documentation.
 
