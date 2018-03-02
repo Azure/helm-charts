@@ -21,7 +21,7 @@ for dir in `ls ../..`;do
         echo "skipping $dir because it lacks a Chart.yaml file"
     else
         echo "packaging $dir"
-        helm dep update ../../$dir
+        helm dep build ../../$dir
         helm package ../../$dir
     fi
 done
