@@ -22,7 +22,7 @@ You will need the following before you can install this chart:
 
 - Kubernetes 1.7+ with RBAC turned on and beta APIs enabled
 - [Service Catalog](https://github.com/kubernetes-incubator/service-catalog) installed
-- [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) installed
+- [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) version v0.9.0-alpha or later installed
 - Support for persistent volumes in the underlying infrastructure
 
 Please see the [prerequisities document](../docs/prerequisities/README.md) for
