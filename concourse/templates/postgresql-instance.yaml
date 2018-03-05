@@ -9,12 +9,14 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  clusterServiceClassExternalName: azure-postgresqldb
+  clusterServiceClassExternalName: azure-postgresql
   clusterServicePlanExternalName: {{ .Values.postgresql.azure.servicePlan }}
   parameters:
     location: {{ .Values.postgresql.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
     sslEnforcement: disabled
-    firewallStartIPAddress: 0.0.0.0
-    firewallEndIPAddress: 255.255.255.255
+    firewallRules:
+    - startIPAddress: "0.0.0.0"
+      endIPAddress: "255.255.255.255"
+      name: "AllowAll"
 {{- end }}
