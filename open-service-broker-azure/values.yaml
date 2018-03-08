@@ -42,6 +42,8 @@ azure:
   clientId: 
   ## Required
   clientSecret: 
+  ## Optional; default Azure location for provisioning resources
+  defaultLocation: 
 
 ## Basic auth credentials that can later be used to access this broker
 basicAuth:
