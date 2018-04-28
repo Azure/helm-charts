@@ -3,7 +3,7 @@
 In order to use the charts in this repository, you must have the following components installed:
 
 1. A compatible [Kubernetes](https://github.com/kubernetes/kubernetes) cluster 
-(version 1.7 or later)
+(version 1.9 or later)
 1. [Helm](https://github.com/kubernetes/helm)
 1. [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 1. [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure)
@@ -17,7 +17,7 @@ Please choose your preferred Kubernetes installation method below.
 ## Minikube
 
 If you are using [Minikube](https://github.com/kubernetes/minikube), ensure that you
-are using version [v0.22.0](https://github.com/kubernetes/minikube/releases/tag/v0.22.0) or
+are using version [v0.22.0](https://github.com/kubernetes/minikube/releases/tag/v0.25.0) or
 above, and simply execute the following to start your Kubernetes cluster:
 
 
@@ -26,7 +26,7 @@ minikube start --extra-config=apiserver.Authorization.Mode=RBAC
 ```
 
 Note: If you're using 
-[v0.23.0](https://github.com/kubernetes/minikube/releases/tag/v0.23.0),
+[v0.25.0](https://github.com/kubernetes/minikube/releases/tag/v0.25.0),
 execute the following after you install Minikube:
 
 ```console

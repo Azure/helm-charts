@@ -25,7 +25,7 @@ The following charts are available:
 
 ## Prerequisites
 
-You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.7 or later,
+You'll need a [Kubernetes](https://kubernetes.io) cluster, version 1.9 or later,
 with [Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 and [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure)
 installed on it.

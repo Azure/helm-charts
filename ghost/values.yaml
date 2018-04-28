@@ -75,7 +75,7 @@ mysql:
     ## The Azure region in which to deploy Azure Database for MySQL
     location: eastus
     ## The plan to request for Azure Database for MySQL
-    servicePlan: standard100
+    servicePlan: general-purpose
 
 ##
 ## MariaDB chart configuration
