@@ -465,7 +465,7 @@ postgresql:
   ##
 
   azure:
-    servicePlan: basic100
+    servicePlan: basic
     location: eastus
 
   ## ALL OF THE FOLLOWING CONFIGURATION IS APPLICABLE ONLY IF

@@ -9,7 +9,7 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  clusterServiceClassExternalName: azure-mysql
+  clusterServiceClassExternalName: azure-mysql-5-7
   clusterServicePlanExternalName: "{{ .Values.mysql.azure.servicePlan }}"
   parameters:
     location: "{{ .Values.mysql.azure.location }}"

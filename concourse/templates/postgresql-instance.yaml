@@ -9,7 +9,7 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  clusterServiceClassExternalName: azure-postgresql
+  clusterServiceClassExternalName: azure-postgresql-9-6
   clusterServicePlanExternalName: {{ .Values.postgresql.azure.servicePlan }}
   parameters:
     location: {{ .Values.postgresql.azure.location }}
