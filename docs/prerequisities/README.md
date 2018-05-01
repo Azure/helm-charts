@@ -16,18 +16,16 @@ Please choose your preferred Kubernetes installation method below.
 
 ## Minikube
 
-If you are using [Minikube](https://github.com/kubernetes/minikube), ensure that you
-are using version [v0.22.0](https://github.com/kubernetes/minikube/releases/tag/v0.25.0) or
-above, and simply execute the following to start your Kubernetes cluster:
+Some older versions of Minikube, as well as some newer ones, suffer from bugs
+that can be worked around, but only with moderate effort. We therefore
+recommend that if you are using Minikube that you use [v0.25.2](https://github.com/kubernetes/minikube/releases/tag/v0.25.2).
 
 
 ```console
 minikube start --extra-config=apiserver.Authorization.Mode=RBAC
 ```
 
-Note: If you're using 
-[v0.25.0](https://github.com/kubernetes/minikube/releases/tag/v0.25.0),
-execute the following after you install Minikube:
+After your Minikube cluster starts, execute the following:
 
 ```console
 kubectl create clusterrolebinding cluster-admin:kube-system \
