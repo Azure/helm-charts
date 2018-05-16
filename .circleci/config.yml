@@ -2,7 +2,7 @@ version: 2
 jobs:
   lint:
     docker:
-      - image: quay.io/deis/helm-chart-publishing-tools:v0.1.0
+      - image: quay.io/deis/helm-chart-publishing-tools:v0.1.1
     working_directory: /charts
     steps:
       - checkout
@@ -12,7 +12,7 @@ jobs:
           working_directory: scripts
   helm-sync:
     docker:
-      - image: quay.io/deis/helm-chart-publishing-tools:v0.1.0
+      - image: quay.io/deis/helm-chart-publishing-tools:v0.1.1
     working_directory: /charts
     steps:
       - checkout
