@@ -68,7 +68,7 @@ KUBECONFIG=$KUBECONFIG_PATH:_output/$CLUSTER_NAME/kubeconfig/kubeconfig.$REGION.
     kubectl config view --flatten > $KUBECONFIG_PATH
 ```
 
-## Azure Container Service (AKS)
+## Azure Kubernetes Service (AKS)
 
 If you would like to use Service Catalog and Open Service Broker for Azure with
 AKS, create a cluster as outlined in the AKS [quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough).
@@ -90,20 +90,12 @@ helm init --upgrade
 Otherwise, you'll need to install the Helm componentry onto your cluster
 yourself. 
 
-If you are using Minikube, run the following commands to complete the installation:
+If you are using AKS or Minikube, run the following commands to complete the installation:
 
 ```console
 kubectl create -f https://raw.githubusercontent.com/Azure/helm-charts/master/docs/prerequisities/helm-rbac-config.yaml
 helm init --service-account tiller
 ```
-
-Note: Currently, AKS does not support Role Based Access Control (RBAC).
-If you are using AKS, you will need to install Helm without RBAC:
-
-```console
-helm init
-```
-
 
 # Step 3: Install Service Catalog
 
