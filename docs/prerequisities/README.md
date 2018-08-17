@@ -102,15 +102,7 @@ helm init --service-account tiller
 After you've successfully installed your Kubernetes cluster and installed Helm, 
 you'll need to install Service Catalog.
 
-To install Service Catalog on an AKS cluster, execute the following commands:
-
-```console
-helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
-helm install svc-cat/catalog --name catalog --namespace catalog --set rbacEnable=false
-```
-Note: when using AKS, you must disable RBAC as shown above.
-
-Otherwise, execute the following commands:
+To install Service Catalog, execute the following commands:
 
 ```console
 helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
