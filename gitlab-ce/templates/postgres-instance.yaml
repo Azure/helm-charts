@@ -1,0 +1,17 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ template "fullname" . }}-postgres
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  clusterServiceClassExternalName: azure-postgresqldb
+  clusterServicePlanExternalName: {{ .Values.postgresql.azure.servicePlan }}
+  parameters:
+    location: {{ .Values.postgresql.azure.location }}
+    resourceGroup: {{ .Release.Namespace }}
+    extensions:
+    - pg_trgm
