@@ -1,7 +1,16 @@
 ## Bitnami WordPress image version
 ## ref: https://hub.docker.com/r/bitnami/wordpress/tags/
 ##
-image: bitnami/wordpress:4.9.4-r0
+apiVersion: extensions/v1beta1
+image: bitnami/wordpress:4.9.8
+
+## Specify the number of replicas
+replicaCount: 3
+
+## enable istio sidecar
+## ref: https://istio.io/docs/setup/kubernetes/sidecar-injection/#configuration-options
+istioSidecar:
+  enabled: true
 
 ## Specify a imagePullPolicy
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -51,11 +60,17 @@ wordpressBlogName: User's Blog!
 
 externalDatabase:
 ## All of these values are only used when mariadb.enabled is set to false
+
+## Azure DB for MySql config
+## ref: https://github.com/Azure/open-service-broker-azure/blob/master/docs/modules/mysql.md
   azure:
+    ## Service name  (there are 3 types)
+    serviceName: azure-mysql-5-7
     ## The Azure region in which to deploy Azure Database for MySQL
     location: eastus
     ## The plan to request for Azure Database for MySQL
     servicePlan: general-purpose
+    ssl: disabled
 
 ##
 ## MariaDB chart configuration
@@ -140,22 +155,21 @@ ingress:
 
     ## Set this to true in order to enable TLS on the ingress record
     ## A side effect of this will be that the backend wordpress service will be connected at port 443
+
+    ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
     tls: false
 
     ## If TLS is set to true, you must declare what secret will store the key/certificate for TLS
     tlsSecret: wordpress.local-tls
 
-    ## Ingress annotations done as key:value pairs
-    ## If you're using kube-lego, you will want to add:
-    ## kubernetes.io/tls-acme: true
-    ##
-    ## For a full list of possible ingress annotations, please see
-    ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/annotations.md
-    ##
-    ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
+    ## If using istio, set ingress.class to istio
+    ## If you're using cert-manager, you will want to enable tls-acme
+     ## If using certmanager, specify cluster-issuer
+     ## ref: http://docs.cert-manager.io/en/latest/getting-started/3-configuring-first-issuer.html
     annotations:
     #  kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: true
+    #  certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 
   secrets:
   ## If you're providing your own certificates, please use this to add the certificates as secrets
@@ -163,7 +177,7 @@ ingress:
   ## -----BEGIN RSA PRIVATE KEY-----
   ##
   ## name should line up with a tlsSecret set further up
-  ## If you're using kube-lego, this is unneeded, as it will create the secret for you if it is not set
+  ## If you're using cert-manager, this is unneeded, as it will create the secret for you if it is not set
   ##
   ## It is also possible to create and manage the certificates outside of this helm chart
   ## Please see README.md for more information
