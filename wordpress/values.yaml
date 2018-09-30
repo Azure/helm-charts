@@ -5,12 +5,14 @@ apiVersion: extensions/v1beta1
 image: bitnami/wordpress:4.9.8
 
 ## Specify the number of replicas
+## If using more than one (replicas are recommended for production), you will also need to provide a ReadWriteMany PVC with a storageClass of "nfs"
+## more on line 193 under "persistence"
 replicaCount: 3
 
 ## enable istio sidecar
 ## ref: https://istio.io/docs/setup/kubernetes/sidecar-injection/#configuration-options
 istioSidecar:
-  enabled: true
+  enabled: false
 
 ## Specify a imagePullPolicy
 ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -190,7 +192,7 @@ ingress:
 ##
 persistence:
   enabled: true
-  ## wordpress data Persistent Volume Storage Class
+  ### wordpress data Persistent Volume Storage Class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
   ## If undefined (the default) or set to null, no storageClassName spec is
@@ -198,6 +200,17 @@ persistence:
   ##   GKE, AWS & OpenStack)
   ##
   # storageClass: "-"
+  ##
+  ## If you want to reuse an existing claim, you can pass the name of the PVC using
+  ## the existingClaim variable
+  # existingClaim: your-claim
+  ##
+  ## To use the /admin portal and to ensure you can scale wordpress you need to provide a
+  ## ReadWriteMany PVC, if you dont have a provisioner for this type of storage
+  ## We recommend that you install the nfs provisioner and map it to a RWO volume
+  ## helm install stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=10Gi
+  ## accessMode: ReadWriteOnce can be used in test/dev environments but is not recommended for production
+  ## accessMode: ReadWriteMany for production
   accessMode: ReadWriteOnce
   size: 10Gi
 
