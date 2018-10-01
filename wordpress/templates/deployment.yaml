@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: {{ .Values.apiVersion }}
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}
@@ -8,11 +8,19 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+      release: "{{ .Release.Name }}"
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
         app: {{ template "fullname" . }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+      annotations:
+        sidecar.istio.io/inject: "{{ default "false" .Values.istioSidecar.enabled }}"
     spec:
       containers:
       - name: {{ template "fullname" . }}
@@ -143,7 +151,7 @@ spec:
       - name: wordpress-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "fullname" . }}
+          claimName: {{ .Values.persistence.existingClaim | default (include "fullname" .) }}
       {{- else }}
         emptyDir: {}
       {{ end }}
