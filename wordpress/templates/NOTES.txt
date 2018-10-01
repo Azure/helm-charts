@@ -37,3 +37,14 @@
 
   echo Username: {{ .Values.wordpressUsername }}
   echo Password: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }} -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+
+{{- if not .Values.mariadb.enabled}}
+
+3. To get your Wordpress database connection details use the following:
+
+  echo Database: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }}-mysql-secret -o jsonpath="{.data.database}" | base64 --decode)
+  echo Host: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }}-mysql-secret -o jsonpath="{.data.host}" | base64 --decode)
+  echo Username: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }}-mysql-secret -o jsonpath="{.data.username}" | base64 --decode)
+  echo Password: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }}-mysql-secret -o jsonpath="{.data.password}" | base64 --decode)
+  echo Port: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ template "fullname" . }}-mysql-secret -o jsonpath="{.data.port}" | base64 --decode)
+{{- end}}
