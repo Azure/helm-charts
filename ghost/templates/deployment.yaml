@@ -2,18 +2,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "ghost.fullname" . }}
+  name: {{ template "fullname" . }}
   labels:
-    app: {{ template "ghost.fullname" . }}
+    app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ template "ghost.fullname" . }}
+        app: {{ template "fullname" . }}
     spec:
       initContainers:
       - name: volume-permissions
@@ -24,13 +24,13 @@ spec:
         - mountPath: /bitnami
           name: ghost-data
       containers:
-      - name: {{ template "ghost.fullname" . }}
+      - name: {{ template "fullname" . }}
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
-        {{- if .Values.mysql.embeddedMaria }}
+        {{- if .Values.mariadb.enabled }}
         - name: MARIADB_HOST
-          value: {{ template "ghost.mariadb.fullname" . }}
+          value: {{ template "mariadb.fullname" . }}
         - name: MARIADB_PORT_NUMBER
           value: "3306"
         - name: GHOST_DATABASE_NAME
@@ -40,33 +40,33 @@ spec:
         - name: GHOST_DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.mariadb.fullname" . }}
+              name: {{ template "mariadb.fullname" . }}
               key: mariadb-password
         {{- else }}
         - name: MARIADB_HOST
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
+              name: {{ template "fullname" . }}-mysql-secret
               key: host
         - name: MARIADB_PORT_NUMBER
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
+              name: {{ template "fullname" . }}-mysql-secret
               key: port
         - name: GHOST_DATABASE_NAME
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
+              name: {{ template "fullname" . }}-mysql-secret
               key: database
         - name: GHOST_DATABASE_USER
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
+              name: {{ template "fullname" . }}-mysql-secret
               key: username
         - name: GHOST_DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}-mysql-secret
+              name: {{ template "fullname" . }}-mysql-secret
               key: password
         {{- end }}
         - name: GHOST_HOST
@@ -78,7 +78,7 @@ spec:
         - name: GHOST_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}
+              name: {{ template "fullname" . }}
               key: ghost-password
         - name: GHOST_EMAIL
           value: {{ default "" .Values.ghostEmail | quote }}
@@ -93,7 +93,7 @@ spec:
         - name: SMTP_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "ghost.fullname" . }}
+              name: {{ template "fullname" . }}
               key: smtp-password
         - name: SMTP_SERVICE
           value: {{ default "" .Values.smtpService | quote }}
@@ -129,7 +129,7 @@ spec:
       - name: ghost-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ template "ghost.fullname" . }}
+          claimName: {{ template "fullname" . }}
       {{- else }}
         emptyDir: {}
       {{- end }}
