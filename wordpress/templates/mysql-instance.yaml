@@ -9,12 +9,12 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  clusterServiceClassExternalName: azure-mysql-5-7
+  clusterServiceClassExternalName: {{ .Values.externalDatabase.azure.serviceName }}
   clusterServicePlanExternalName: {{ .Values.externalDatabase.azure.servicePlan }}
   parameters:
     location: {{ .Values.externalDatabase.azure.location }}
     resourceGroup: {{ .Release.Namespace }}
-    sslEnforcement: disabled
+    sslEnforcement: {{ .Values.externalDatabase.azure.ssl }}
     firewallRules:
     - startIPAddress: "0.0.0.0"
       endIPAddress: "255.255.255.255"
