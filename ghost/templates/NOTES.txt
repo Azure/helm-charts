@@ -27,7 +27,7 @@ host. To configure Ghost with the URL of your service:
 {{- else -}}
 1. Get the Ghost URL by running:
 
-{{- if eq .Values.serviceType "ClusterIP" }}
+{{- if and (eq .Values.serviceType "ClusterIP") (not .Values.ingress.enabled) }}
 
   echo Blog URL  : http://127.0.0.1:{{ default "80" .Values.ghostPort }}{{ .Values.ghostPath }}
   echo Admin URL : http://127.0.0.1:{{ default "80" .Values.ghostPort }}{{ .Values.ghostPath }}ghost
@@ -40,6 +40,11 @@ host. To configure Ghost with the URL of your service:
   echo Blog URL  : http://$APP_HOST:$APP_PORT{{ .Values.ghostPath }}
   echo Admin URL : http://$APP_HOST:$APP_PORT{{ .Values.ghostPath }}ghost
 
+{{- else if contains "true" .Values.ingress.enabled}}
+  {{- range .Values.ingress.hosts }}
+  echo Blog URL  : http://{{ . }}/
+  echo Admin URL : http://{{ . }}/ghost
+  {{- end }}
 {{- else }}
 
   echo Blog URL  : http://{{ include "ghost.host" . }}
