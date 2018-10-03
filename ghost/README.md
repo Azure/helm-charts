@@ -45,7 +45,7 @@ configuration. The [configuration](#configuration) section lists the parameters 
 To uninstall/delete the `my-release` deployment:
 
 ```console
-$ helm delete my-release
+$ helm delete --purge my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -57,40 +57,51 @@ name from the helm deployments list.
 
 The following tables lists the configurable parameters of the Ghost chart and their default values.
 
-| Parameter                         | Description                                           | Default                                                   |
-| --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
-| `image`                           | Ghost image                                           | `bitnami/ghost:{VERSION}`                                 |
-| `imagePullPolicy`                 | Image pull policy                                     | `Always` if `image` tag is `latest`, else `IfNotPresent`  |
-| `ghostHost`                       | Ghost host to create application URLs                 | `nil`                                                     |
-| `ghostPort`                       | Ghost port to create application URLs along with host | `80`                                                      |
-| `ghostLoadBalancerIP`             | `loadBalancerIP` for the Ghost Service                | `nil`                                                     |
-| `ghostUsername`                   | User of the application                               | `user@example.com`                                        |
-| `ghostPassword`                   | Application password                                  | Randomly generated                                        |
-| `ghostEmail`                      | Admin email                                           | `user@example.com`                                        |
-| `ghostBlogTitle`                  | Ghost Blog name                                       | `User's Blog`                                             |
-| `mysql.embeddedMaria`             | Whether to fulfill the dependency on MySQL using an embedded (on-cluster) MariaDB database _instead of Azure Database for MySQL_. This option is available to enable local or no-cost evaluation of this chart.                    | `false`                                                   |
+| Parameter                     | Description                                                   | Default                                                  |
+|-------------------------------|---------------------------------------------------------------|----------------------------------------------------------|
+| `image.registry`              | Ghost image registry                                          | `docker.io`                                              |
+| `image.repository`            | Ghost Image name                                              | `bitnami/ghost`                                          |
+| `image.tag`                   | Ghost Image tag                                               | `{VERSION}`                                              |
+| `image.pullPolicy`            | Image pull policy                                             | `Always` if `imageTag` is `latest`, else `IfNotPresent`  |
+| `image.pullSecrets`           | Specify image pull secrets                                    | `nil`                                                    |
+| `replicaCount`                | `replicas` for the pod count                                  | `1`                                                      |
+| `updateStrategy`              | `updateStrategy` for deployment                               | `RollingUpdate`                                          |
+| `minReadySeconds`             | how many seconds an apiServer pod needs to be ready before killing the next, during update                         | `1`                                                      ||
+|`volumePermissions.image.name` | image for init containers and volume mounting | busybox |
+|`volumePermissions.image.tag` | image tag for init containers and volume mounting | busybox |
+| `ghostHost`                   | Ghost host to create application URLs                         | `nil`                                                    |
+| `ghostPath`                   | Ghost path to create application URLs                         | `nil`                                                    |
+| `ghostPort`                   | Ghost port to create application URLs along with host         | `80`                                                     |
+| `ghostLoadBalancerIP`         | `loadBalancerIP` for the Ghost Service                        | `nil`                                                    |
+| `ghostUsername`               | User of the application                                       | `user@example.com`                                       |
+| `ghostPassword`               | Application password                                          | Randomly generated                                       |
+| `ghostEmail`                  | Admin email                                                   | `user@example.com`                                       |
+| `ghostBlogTitle`              | Ghost Blog name                                               | `User's Blog`                                            |
+| `allowEmptyPassword`          | Allow DB blank passwords                                      | `yes`                                                    |
+| `mariadb.enabled`             | Whether or not to install MariaDB (disable if using external) | `false`                                                   |
 | `serviceType`                     | Kubernetes Service type                               | `LoadBalancer`                                            |
-| `persistence.enabled`             | Enable persistence using PVC                          | `true`                                                    |
-| `persistence.storageClass`        | PVC Storage Class for Ghost volume                    | `nil` (uses alpha storage annotation)                     |
-| `persistence.accessMode`          | PVC Access Mode for Ghost volume                      | `ReadWriteOnce`                                           |
+| `master.persistence.enabled`             | Enable persistence using PVC                          | `true`                                                    |
+| `master.persistence.storageClass`        | PVC Storage Class for Ghost volume                    | `nil` (uses alpha storage annotation)                     |
+| `master.persistence.accessMode`          | PVC Access Mode for Ghost volume                      | `ReadWriteOnce`                                           |
+| `persistence.enabled`                | Enable persistence                  | `true`                                                     |
 | `persistence.size`                | PVC Storage Request for Ghost volume                  | `8Gi`                                                     |
 | `resources`                       | CPU/Memory resource requests/limits                   | Memory: `512Mi`, CPU: `300m`                              |
 
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `false` (the default):
+The following configuration options are utilized only if `mariadb.enabled` is set to `false` (the default):
 
 | Parameter                         | Description                                           | Default                                                   |
 | --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
 | `mysql.azure.location`            | The Azure region in which to deploy Azure Database for MySQL | `eastus`                                           |
 | `mysql.azure.servicePlan`         | The plan to request for Azure Database for MySQL      | `standard100`                                             |
 
-The following configuration options are utilized only if `mysql.embeddedMaria` is set to `true`:
+The following configuration options are utilized only if `mariadb.enabled` is set to `true`:
 
 | Parameter                         | Description                                           | Default                                                   |
 | --------------------------------- | ----------------------------------------------------- | --------------------------------------------------------- |
-| `mariadb.mariadbRootPassword`     | MariaDB admin password                                | `nil`                                                     |
-| `mariadb.mariadbDatabase`         | Database name to create                               | `bitnami_ghost`                                           |
-| `mariadb.mariadbUser`             | Database user to create                               | `bn_ghost`                                                |
-| `mariadb.mariadbPassword`         | Password for the database                             | _random 10 character long alphanumeric string_            |
+| `mariadb.rootUser.password` | MariaDB admin password                                        | `nil`                                                    |
+| `mariadb.db.name`     | MariaDB Database name to create                               | `bitnami_ghost`                                          |
+| `mariadb.db.user`         | MariaDB Database user to create                               | `bn_ghost`                                               |
+| `mariadb.db.password`     | MariaDB Password for user                                     | _random 10 character long alphanumeric string_           |
 
 The above parameters map to the env variables defined in [bitnami/ghost](http://github.com/bitnami/bitnami-docker-ghost). For more information please refer to the [bitnami/ghost](http://github.com/bitnami/bitnami-docker-ghost) image documentation.
 
@@ -100,9 +111,9 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 $ helm install azure/ghost \
   --name my-release \
   --namespace ghost \
-  --set mysql.embeddedMaria=true \
-  --set mariadb.mariadbRootPassword=Password12345 \
-  --set mariadb.mariadbPassword=Password12
+  --set mariadb.enabled=true \
+  --set mariadb.rootUser=rootUser \
+  --set mariadb.rootUser.password=Password12
 ```
 
 For example, for external MySQL,
