@@ -100,7 +100,7 @@ mysql:
 ##
 mariadb:
   ## Whether to deploy a mariadb server to satisfy the applications database requirements. To use an external database set this to false and configure the externalDatabase parameters
-  enabled: true
+  enabled: false
   ## Disable MariaDB replication
   replication:
     enabled: false
@@ -141,7 +141,7 @@ mariadb:
 ## Kubernetes configuration
 ## For minikube, set this to NodePort, elsewhere use LoadBalancer
 ##
-serviceType: ClusterIP
+serviceType: LoadBalancer
 
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
@@ -177,7 +177,7 @@ resources:
      ## If using certmanager, specify cluster-issuer
      ## ref: http://docs.cert-manager.io/en/latest/getting-started/3-configuring-first-issuer.html
 ingress:
-  enabled: false
+  enabled: "false"
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
