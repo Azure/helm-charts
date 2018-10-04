@@ -30,16 +30,18 @@ volumePermissions:
     tag: 1.27.1
 #    pullPolicy:
 
-## Ghost host and path to create application URLs
+## Hostname for your application
+## If left blank, localhost will be used
+#hostName:
+## Ghost path to create application URLs
 ## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
 ##
-# ghostHost:
-ghostPath: /
+hostPath: /
 
 ## Ghost port to create application URLs along with host.
 ## ref: https://github.com/bitnami/bitnami-docker-ghost#configuration
 ##
-ghostPort: 80
+hostPort: 80
 
 ## loadBalancerIP for the Ghost Service (optional, cloud specific)
 ## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
@@ -155,6 +157,12 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
+  ## To ensure you can scale wordpress (and if using more than 1 replica) you need to provide a
+  ## ReadWriteMany PVC, if you dont have a provisioner for this type of storage
+  ## We recommend that you install the nfs provisioner and map it to a RWO volume
+  ## helm install stable/nfs-server-provisioner --set persistence.enabled=true,persistence.size=10Gi
+  ## accessMode: ReadWriteOnce can be used in test/dev environments but is not recommended for production
+  ## accessMode: ReadWriteMany for production
   # storageClass: "-"
   accessMode: ReadWriteOnce
   size: 8Gi

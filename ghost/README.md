@@ -69,9 +69,9 @@ The following tables lists the configurable parameters of the Ghost chart and th
 | `minReadySeconds`             | how many seconds an apiServer pod needs to be ready before killing the next, during update                         | `1`                                                      ||
 |`volumePermissions.image.name` | image for init containers and volume mounting | busybox |
 |`volumePermissions.image.tag` | image tag for init containers and volume mounting | busybox |
-| `ghostHost`                   | Ghost host to create application URLs                         | `nil`                                                    |
-| `ghostPath`                   | Ghost path to create application URLs                         | `nil`                                                    |
-| `ghostPort`                   | Ghost port to create application URLs along with host         | `80`                                                     |
+| `hostName`                   | Hostname to create application URLs                         | `nil`                                                    |
+| `hostPath`                   | Hostpath to create application URLs                         | `nil`                                                    |
+| `hostPort`                   | Ghost port to create application URLs along with host         | `80`                                                     |
 | `ghostLoadBalancerIP`         | `loadBalancerIP` for the Ghost Service                        | `nil`                                                    |
 | `ghostUsername`               | User of the application                                       | `user@example.com`                                       |
 | `ghostPassword`               | Application password                                          | Randomly generated                                       |

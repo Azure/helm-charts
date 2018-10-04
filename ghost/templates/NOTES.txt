@@ -23,22 +23,22 @@ host. To configure Ghost with the URL of your service:
 2. Complete your Ghost deployment by running:
 
   helm upgrade {{ .Release.Name }} \
-    --set serviceType={{ .Values.serviceType }},ghostHost=$APP_HOST stable/ghost
+    --set serviceType={{ .Values.serviceType }},hostName=$APP_HOST stable/ghost
 {{- else -}}
 1. Get the Ghost URL by running:
 
 {{- if and (eq .Values.serviceType "ClusterIP") (not .Values.ingress.enabled) }}
 
-  echo Blog URL  : http://127.0.0.1:{{ default "80" .Values.ghostPort }}{{ .Values.ghostPath }}
-  echo Admin URL : http://127.0.0.1:{{ default "80" .Values.ghostPort }}{{ .Values.ghostPath }}ghost
-  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ template "ghost.fullname" . }} {{ default "80" .Values.ghostPort }}:2368
+  echo Blog URL  : http://127.0.0.1:{{ default "80" .Values.hostPort }}{{ .Values.hostPath }}
+  echo Admin URL : http://127.0.0.1:{{ default "80" .Values.hostPort }}{{ .Values.hostPath }}ghost
+  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ template "ghost.fullname" . }} {{ default "80" .Values.hostPort }}:2368
 
 {{- else if eq .Values.serviceType "NodePort" }}
   export APP_HOST=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   export APP_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ template "ghost.fullname" . }})
 
-  echo Blog URL  : http://$APP_HOST:$APP_PORT{{ .Values.ghostPath }}
-  echo Admin URL : http://$APP_HOST:$APP_PORT{{ .Values.ghostPath }}ghost
+  echo Blog URL  : http://$APP_HOST:$APP_PORT{{ .Values.hostPath }}
+  echo Admin URL : http://$APP_HOST:$APP_PORT{{ .Values.hostPath }}ghost
 
 {{- else if contains "true" .Values.ingress.enabled}}
   {{- range .Values.ingress.hosts }}

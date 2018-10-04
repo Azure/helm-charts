@@ -100,7 +100,7 @@ spec:
         - name: GHOST_HOST
           value: {{ include "ghost.host" . | quote }}
         - name: GHOST_PORT_NUMBER
-          value: {{ .Values.ghostPort | quote }}
+          value: {{ .Values.hostPort | quote }}
         - name: GHOST_USERNAME
           value: {{ .Values.ghostUsername | quote }}
         - name: GHOST_PASSWORD
