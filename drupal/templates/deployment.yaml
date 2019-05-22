@@ -19,6 +19,23 @@ spec:
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
+        {{- if .Values.redis.embeddedRedis }}
+        - name: REDIS_HOST
+          value: {{ template "drupal.redis.fullname" . }}
+        - name: REDIS_PORT_NUMBER
+          value: "6380"
+        {{- else }}
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "drupal.fullname" . }}-redis-secret
+              key: host
+        - name: REDIS_PORT_NUMBER
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "drupal.fullname" . }}-redis-secret
+              key: port
+        {{- end }}
         {{- if .Values.mysql.embeddedMaria }}
         - name: MARIADB_HOST
           value: {{ template "drupal.mariadb.fullname" . }}

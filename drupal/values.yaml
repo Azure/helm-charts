@@ -31,6 +31,12 @@ drupalUsername: user
 ##
 drupalEmail: user@example.com
 
+redis:
+  embeddedRedis: false
+  azure:
+    location: eastus
+    servicePlan: standard
+
 mysql:
   ## Whether to fulfill the dependency on MySQL using an embedded (on-cluster)
   ## MariaDB database _instead of Azure Database for MySQL. This option is
