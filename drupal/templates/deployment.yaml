@@ -19,12 +19,13 @@ spec:
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
-        {{- if .Values.redis.embeddedRedis }}
+        {{- if and .Values.redis.enabled (.Values.redis.embeddedRedis) }}
         - name: REDIS_HOST
           value: {{ template "drupal.redis.fullname" . }}
         - name: REDIS_PORT_NUMBER
           value: "6380"
-        {{- else }}
+        {{- end}}
+        {{- if and .Values.redis.enabled (not .Values.redis.embeddedRedis) }}
         - name: REDIS_HOST
           valueFrom:
             secretKeyRef:

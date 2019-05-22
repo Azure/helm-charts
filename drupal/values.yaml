@@ -32,6 +32,7 @@ drupalUsername: user
 drupalEmail: user@example.com
 
 redis:
+  enabled: false
   embeddedRedis: false
   azure:
     location: eastus

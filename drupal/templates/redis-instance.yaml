@@ -1,4 +1,4 @@
-{{- if not .Values.redis.embeddedRedis }}
+{{- if and .Values.redis.enabled (not .Values.redis.embeddedRedis) }}
 apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
