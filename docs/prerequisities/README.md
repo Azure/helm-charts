@@ -118,4 +118,4 @@ After you've successfully installed service catalog, you'll need to install
 [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure).
 
 To do so, please follow the 
-[installation instructions for Open Service Broker for Azure](https://github.com/Azure/helm-charts/tree/master/open-service-broker-azure).
+[installation instructions for Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure/tree/master/contrib/k8s/charts/open-service-broker-azure).
