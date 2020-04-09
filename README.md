@@ -1,14 +1,12 @@
-# Helm Charts for Kubernetes Service Catalog on Azure
 
-[![CircleCI](https://circleci.com/gh/Azure/helm-charts.svg?style=svg&circle-token=e8c9c6863d2aac35c678888ca7346618be17aeb8)](https://circleci.com/gh/Azure/helm-charts)
+## **This repo is no longer being actively maintained. We recommend that you look at the [Bitnami Helm charts repo](https://github.com/bitnami/charts) instead.**
+
+# Helm Charts for Kubernetes Service Catalog on Azure
 
 This repository contains [Helm](https://helm.sh/) charts for use with the
 [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 and
 [Microsoft Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure).
-
-| 🚨  | The project is in **alpha** status. This means that no assurances are made about backwards compatibility or stability. |
-|---|---|
 
 Each chart has one or more dependencies on Azure services (e.g. Azure SQL, CosmosDB, ...)
 which are fulfilled by [Open Service Broker for Azure](https://github.com/Azure/open-service-broker-azure) and
@@ -56,40 +54,3 @@ stable/wordpress	0.6.10 	Web publishing platform for building blogs and ...
 ```
 
 The `azure/wordpress` chart shown in the output above is the chart that you see in this Github repository.
-
-## Creating a New Chart
-
-If you have an idea for an application you'd like to see in this repository,
-we'd love to see it! We welcome all pull requests.
-
-If you're looking for some ideas for charts to write, we have a list of interesting
-ones under the
-[`Help Wanted`](https://github.com/Azure/helm-charts/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-label in our issues list.
-
-Please follow these guidelines when creating your new chart:
-
-- Look at the [upstream charts repository](https://github.com/kubernetes/charts) for prior art
-- Wherever possible, ensure that your chart has the option to install the service to be
-provisioned locally, in the cluster
-    - For example, if your chart provisions Azure MySQL, ensure that the chart can be
-    installed with the option to create a MySQL instance in the cluster. The default should
-    be to provision on Azure
-- Include a detailed README.md and NOTES.txt file for your chart
-    - Example [README.md](./wordpress/README.md) and [NOTES.txt](./wordpress/templates/NOTES.txt)
-
-## Contributing
-
-For details on how to contribute to this project, please see [contributing.md](./docs/contributing.md).
-
-This project welcomes contributions and suggestions. All contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
